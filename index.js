@@ -15,11 +15,11 @@ const client = new Client({
 // Carregar banco de dados de soluções
 let bancoDados = {};
 try {
-  const dados = fs.readFileSync('solucoes.json', 'utf8');
+  const dados = fs.readFileSync('solucoes_importadas.json', 'utf8');
   bancoDados = JSON.parse(dados);
   console.log(`✅ Banco de dados carregado: ${bancoDados.solucoes.length} soluções`);
 } catch (erro) {
-  console.error('❌ Erro ao carregar solucoes.json:', erro.message);
+  console.error('❌ Erro ao carregar solucoes_importadas.json:', erro.message);
   process.exit(1);
 }
 
@@ -131,7 +131,7 @@ function salvarNovaSolucao(problema, solucao, palavrasChave, tags) {
   bancoDados.solucoes.push(novaSolucao);
 
   try {
-    fs.writeFileSync('solucoes.json', JSON.stringify(bancoDados, null, 2), 'utf8');
+    fs.writeFileSync('solucoes_importadas.json', JSON.stringify(bancoDados, null, 2), 'utf8');
     return true;
   } catch (erro) {
     registrarLog('ERRO', `Erro ao salvar: ${erro.message}`);
