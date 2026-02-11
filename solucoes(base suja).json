@@ -1,0 +1,1331 @@
+{
+  "solucoes": [
+    {
+      "id": 1,
+      "palavras_chave": [
+        "como",
+        "pesquisar",
+        "problema"
+      ],
+      "problema": "Como Pesquisar Problema",
+      "solucao": "Para pesquisar alguma situaÃ§Ã£o em especÃ­fico, pode clicar no teclado o comando \" **Ctrl + K** \", **DIGITA O NOME OU ERRO EM ESPECÃFICO** que estÃ¡ buscando e verifica se tem alguma coisa relacionada, se achar, clica a tecla **ENTER**.\n\n@everyone",
+      "tags": [
+        "gerais",
+        "como",
+        "pesquisar",
+        "problema"
+      ],
+      "metadata": {
+        "canal_id": "1463225868984910056",
+        "canal_nome": "1-como-pesquisar-problema",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:26:03.5108627-03:00"
+      }
+    },
+    {
+      "id": 2,
+      "palavras_chave": [
+        "atalho",
+        "dav",
+        "gerar",
+        "nfs"
+      ],
+      "problema": "Atalho Dav Gerar Nfs",
+      "solucao": "1- clica \" F11 \" para encerrar.\n2- Depois clica \" CNTRL + N\" para gerar a NFE ou \" CTRL + P\" para gerar NFCE.\n3- Depois clica \" Transmitir \" para transmitir a nota fiscal.",
+      "tags": [
+        "gerais",
+        "atalho",
+        "dav",
+        "gerar"
+      ],
+      "metadata": {
+        "canal_id": "1413125789141962802",
+        "canal_nome": "atalho-dav-gerar-nfs",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:26:59.469413-03:00"
+      }
+    },
+    {
+      "id": 3,
+      "palavras_chave": [
+        "configuraÃ§Ã£o",
+        "tef"
+      ],
+      "problema": "ConfiguraÃ§Ã£o De Tef",
+      "solucao": "Pode ir no Vendas > UtilitÃ¡rios > ConfiguraÃ§Ã£o do Sistema > TEF",
+      "tags": [
+        "gerais",
+        "configuraÃ§Ã£o",
+        "tef"
+      ],
+      "metadata": {
+        "canal_id": "1428347781210308770",
+        "canal_nome": "configuraÃ§Ã£o-de-tef",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:27:01.0603309-03:00"
+      }
+    },
+    {
+      "id": 4,
+      "palavras_chave": [
+        "criar",
+        "sped"
+      ],
+      "problema": "Criar Sped",
+      "solucao": "**1**- Ir em FISCAL > SPED > SELECIONAR A CAIXA \" PARA SPED\"\n**2**- LÃ EM BAIXO SELECIONAR O MÃŠS QUE QUER\n**3**- SELECIONAR ANO\n**4**- QUANDO APARECER MENSAGEM COLOCA \"NÃƒO\"\n**5**- diretÃ³rio para achar os arquivos SPEED: \" C:\\Program Files\\Inovar Sistemas\\Gestao Comercial\\Contabilidade \"",
+      "tags": [
+        "gerais",
+        "criar",
+        "sped"
+      ],
+      "metadata": {
+        "canal_id": "1434987209534214225",
+        "canal_nome": "criar-sped",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:26:54.3536242-03:00"
+      }
+    },
+    {
+      "id": 5,
+      "palavras_chave": [
+        "icms",
+        "alterar",
+        "transferencia",
+        "credito"
+      ],
+      "problema": "Icms Alterar Transferencia De Credito",
+      "solucao": "Alterar trasnferencia de credito icms\nvai na nota > clica em atalhos > alterar transferencia de credito de ICMS > coloca a porcentagem que ela quer",
+      "tags": [
+        "gerais",
+        "icms",
+        "alterar",
+        "transferencia"
+      ],
+      "metadata": {
+        "canal_id": "1414679611341672598",
+        "canal_nome": "icms-alterar-transferencia-de-credito",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:26:52.7320911-03:00"
+      }
+    },
+    {
+      "id": 6,
+      "palavras_chave": [
+        "lidiane",
+        "desmarcar",
+        "venda",
+        "estoque"
+      ],
+      "problema": "Lidiane Desmarcar Venda S Estoque",
+      "solucao": "**No sistema COMERCIAL: Colocar no boneco VERMELHO ( CTRL + SHIFT + F )**\n\nIR EM UTILITARIOS > CONFIG SISTEMA > CONFIG NF-E 1 > \"AVISO DE ESTOQUE\" E SELECIONAR \"SEM AVISO\".\n\nDEPOIS IR EM DAV-OS 1 > IR EM \"AVISO ESTOQUE\" E SELECIONAR \" SEM AVISO \".\n\nDEPOIS VOLTAR AS CONFIGURAÃ‡Ã•ES:\n\nALTERAR PARA \" 4 \" NO NF-E 1\nE PARA \" 10 \" NO DAV-OS 1\n\na opÃ§Ã£o que fica como padrÃ£o Ã© \" 4 - EST. ZERO (BLOQUEIO)",
+      "tags": [
+        "gerais",
+        "lidiane",
+        "desmarcar",
+        "venda"
+      ],
+      "metadata": {
+        "canal_id": "1419675408638541846",
+        "canal_nome": "lidiane-desmarcar-venda-s-estoque",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:26:56.0775456-03:00"
+      }
+    },
+    {
+      "id": 7,
+      "palavras_chave": [
+        "tirar",
+        "relatorio",
+        "frigo"
+      ],
+      "problema": "Tirar Relatorio Frigo",
+      "solucao": "Tirar relatÃ³rio FRIGO\n\n1-  COMANDO PARA PEGAR RELATORIO\n\nSELECT DAV_NUMERO AS NUMERO, \nIF(DAV_SITUACAO=2, \"CANCELADO\", IF(DAV_SITUACAO=1, \"ENCERRADO\", \"PENDENTE\")) AS SITUACAO,\nDAV_PLACA AS PLACA, \nCLI_NOME AS CLIENTE,\nCLI_FANTASIA AS FANTASIA,\nCLI_DOC1 AS CNPJ,\nDEP_DESCRICAO AS DEPTO,\nDATE_FORMAT(IF(DAV_SITUACAO=0, DAV_DATAINICIO, DAV_DATAFINAL), \"%d/%m/%Y\") AS DATA,\nDAV_SALDO AS VALOR, \nDAV_ANO AS ANO,\nDAV_KM AS KM,\nDAV_MARCA AS MARCA,\nDAV_MODELO AS MODELO, \nDAV_COR AS COR\nFROM DAVCOMOS, CLIENTES, DEPTOS\nWHERE (DAVCOMOS.COD_CLIENTE=CLIENTES.CLI_CODIGO) AND (DAVCOMOS.COD_DEPTO=DEPTOS.DEP_CODIGO)\nAND (IF(DAV_SITUACAO=0, DAV_DATAINICIO, DAV_DATAFINAL) BETWEEN \"2024-06-06\" AND \"2024-06-24\")\nORDER BY PLACA;\n\n2- Acessa o Heidi > Nuvem Inovar > \"Aba pesquisa \"Filtro de Banco > Frigo >\n\n3- Consulta > Cola o comando > Alterar as datas que ele quer o relatÃ³rio > F9 pra excutar o comando\n\n4- Seleciona tudo > botÃ£o direto > exportar registros\n\n5- Formatar o Excel para deixar bonito",
+      "tags": [
+        "gerais",
+        "tirar",
+        "relatorio",
+        "frigo"
+      ],
+      "metadata": {
+        "canal_id": "1414593388933677167",
+        "canal_nome": "tirar-relatorio-frigo",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:26:05.0771427-03:00"
+      }
+    },
+    {
+      "id": 8,
+      "palavras_chave": [
+        "verificaÃ§Ã£o",
+        "servidor",
+        "banco",
+        "dados"
+      ],
+      "problema": "VerificaÃ§Ã£o Servidor Banco De Dados",
+      "solucao": "Quando ocorrer este erro, ir em : \nDISCO LOCAL â†’ ARQUIVOS DE PROGRAMAS â†’ INOVAR SISTEMS â†’ GESTÃƒO COMERCIAL â†’ COLAR CAMINHO â†’ VOLTAS UMA PASTINHA â†’ CONF DO SISTEMA â†’ COLAR CAMINHO â†’ INSERIR SENHA â†’ LER LINI \n\n- BANCO EM NUVEM 3306\n- BANCO LOCAL 3307 \nASSIM VOCE FAZ A VERIFICAÃ‡ÃƒO DO BANCO DE DADOS DO CLIENTE\n\nCaso seja 3307, pedir acesso da mÃ¡quina servidor",
+      "tags": [
+        "gerais",
+        "verificaÃ§Ã£o",
+        "servidor",
+        "banco"
+      ],
+      "metadata": {
+        "canal_id": "1437490915865526634",
+        "canal_nome": "verificaÃ§Ã£o-servidor-banco-de-dados",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:26:57.6077948-03:00"
+      }
+    },
+    {
+      "id": 9,
+      "palavras_chave": [
+        "clientes",
+        "resolvidos"
+      ],
+      "problema": "Clientes Resolvidos",
+      "solucao": "IR EM FINANCEIRO > CONTAS A RECEBER > INCLUI O CLIENTE (RAZAO SOCIAL/NOME) > IR EM ATALHOS > INCLUIR > NO TOTAL, COLOCA O TOTAL DOS 12 MESES > CLICA EM F2 NO \"PRAZO DE PAGAMENTO\",  COLOCAR PRAZO DE PAGAMENTO(12X) > DEPOIS ALI EM BAIXO ELE VAI CRIAR AS 12 PARCELAS > CLICAR EM CONFIRMAR.\n\n\nSE NAO TIVER O PRAZO DE 12X, CRIAR O PRAZO\nIR EM FINANCEIRO > PRAZO DE PAGAMENTO > INCLUIR > DESC BOTA \" 12X \" > CLICA EM MENSAL E COLOCA \" 12 \"> SALVAR.\n\n**24.10.25 - Paulo Ape Toldos (num: 4899853197)**\n\nMarlon conferiu comigo e jÃ¡ tem configurado para cada tipo de pagamento para gerar nota automaticamente, entÃ£o estÃ¡ gerando o cupom correto dessa forma jÃ¡.\nCaminho orientado para ele para conseguir tirar cupom com desconto nas peÃ§as.\n\n\n**InstruÃ§Ã£o passada a ele:**\n\nRetirar Notas e Dar desconto no item\n\n\nColocar no boneco vermelho ( CTRL + SHIFT + F)\n\n1- Ir em : Pedidos > DAV \n2- Colocar sua senha\n3- Clicar \" Pedido +  \"\n4- Clicar em \" F2-cÃ³digo \"\n5- Selecionar o produto que deseja e dar dois cliques\n6- Clicar na tela enter para vincular o produto\n7- Clicar em \" PreÃ§o UnitÃ¡rio \" e alterar para o valor que deseja\n8- Depois de colocar o valor que desejar, clicar no enter do teclado.\n9- Clicar na tecla F11 ( ele vai encerrar o pedido )\n10- CTRL + P ( Pra gerar a nota )\n\n**-------------------------------------------------------------------------------------------------------**\n**13.10.25 - Loja Conwer **\n\n**eles utilizam atalho para verificar estoque das outras filiais.**\n\nos atalhos seriam:\n\nUSAM F9 (para abrir a tela de itens) e clicam CTRL + SHIFT + F11 (vai abrir uma tela mostrando as filiais e quantidades de itens\n\n**----------------------------------------------------------------------------------------------**\n**24.10.25 - Felipe Meu Japa**\n\nFoi feito alteraÃ§Ã£o para separar os caixas, mediante a solicitaÃ§Ã£o dele.\n\n1531423379 - pc servidor ( nome pc: DESKTOP-D77UPOH) caixa 0\n\n1162431992 -  pc filia caixa 2 (caixa 1)",
+      "tags": [
+        "GERAL",
+        "clientes",
+        "resolvidos"
+      ],
+      "metadata": {
+        "canal_id": "1414682585375969441",
+        "canal_nome": "clientes-resolvidos",
+        "total_mensagens": 4,
+        "data_export": "2026-02-03T10:20:40.8387076-03:00"
+      }
+    },
+    {
+      "id": 10,
+      "palavras_chave": [
+        "senha",
+        "erp",
+        "web"
+      ],
+      "problema": "Senha Erp Web",
+      "solucao": "https://erp.inovarsistemas.com/login\n\nlogin : suporte@inovarsistemas.com\nsenha : Rkccro2020**",
+      "tags": [
+        "GERAL",
+        "senha",
+        "erp",
+        "web"
+      ],
+      "metadata": {
+        "canal_id": "1423386783747543130",
+        "canal_nome": "senha-erp-web",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:20:38.9985685-03:00"
+      }
+    },
+    {
+      "id": 11,
+      "palavras_chave": [
+        "atualizaÃ§Ã£o",
+        "gerar",
+        "xml"
+      ],
+      "problema": "AtualizaÃ§Ã£o Gerar Xml",
+      "solucao": "**ATUALIZAÃ‡ÃƒO REFERENTE A GERAÃ‡ÃƒO DE ARQUIVOS FISCAIS NO WEB E PDV**\n\nSincronizar o PDV Instalado,\n\nAcesse o cliente.\nPressione o comando:\nCTRL + SHIFT + M\nâ†’ Isso irÃ¡ sincronizar os itens pendentes no PDV instalado.\n\nPainel do suporte,\n\nAcessar o painel do suporte.\nSelecione o cliente e entre nas configuraÃ§Ãµes > Fiscal > Contabilidade.\nInforme o email do contador.\n\nSistema WEB,\n\nAcessar o sistema web.\nEntre no menu FISCAL > Documentos para contabilidade.\nSelecione o tipo de documento e o perÃ­odo.\nSeleciona todos e clica em enviar.\n\n**CASO O CLIENTE NÃƒO UTILIZE PDV, REALIZAR O PROCESSO A PARTIR DA ETAPA 2.**",
+      "tags": [
+        "âš ï¸ANOTAÃ‡Ã•ES",
+        "atualizaÃ§Ã£o",
+        "gerar",
+        "xml"
+      ],
+      "metadata": {
+        "canal_id": "1445044152546103337",
+        "canal_nome": "atualizaÃ§Ã£o-gerar-xml",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:25:51.2964312-03:00"
+      }
+    },
+    {
+      "id": 12,
+      "palavras_chave": [
+        "cliente",
+        "marina",
+        "tiete"
+      ],
+      "problema": "Cliente Marina Tiete",
+      "solucao": "Seguem abaixo todas as informaÃ§Ãµes importantes sobre o ambiente do cliente Marina Tiete, que possui algumas particularidades especÃ­ficas:\n\nSERVIDOR\nO servidor do cliente funciona por meio de Ãrea de Trabalho Remota.\nFoi criado um usuÃ¡rio exclusivo para nosso acesso:\nUsuÃ¡rio: inovar.sistemas\nSenha: Sistema@2025\n\nXAMPP\nO XAMPP nÃ£o estÃ¡ instalado no disco C, como Ã© o padrÃ£o.\nEle estÃ¡ localizado no Disco Local E, sendo necessÃ¡rio atenÃ§Ã£o ao acessar diretÃ³rios e serviÃ§os.\n\nIMPRESSORAS\nO cliente utiliza a funÃ§Ã£o de impressÃ£o agrupada por impressora para produÃ§Ã£o.\nExemplo: existem trÃªs grupos que imprimem todos na impressora do bar; nesse caso, tudo deve sair em uma Ãºnica folha.\nJÃ¡ na cozinha, eles precisam que as impressÃµes sejam separadas por grupo, por isso foram criadas diversas impressoras configuradas na mesma porta IP, permitindo a separaÃ§Ã£o fÃ­sica por setor.\nEm caso de dÃºvidas sobre a lÃ³gica das impressoras, favor consultar-me.\n\nPERMISSÃ•ES DO WINDOWS\nAlgumas operaÃ§Ãµes exigem autenticaÃ§Ã£o com credenciais do Windows.\nSomente a senha do administrador funciona para essas permissÃµes.\nEssa senha nÃ£o estÃ¡ com o cliente, apenas com o TI responsÃ¡vel: Richard.\nTemos o contato dele e podemos acionÃ¡-lo sempre que necessÃ¡rio.",
+      "tags": [
+        "âš ï¸ANOTAÃ‡Ã•ES",
+        "cliente",
+        "marina",
+        "tiete"
+      ],
+      "metadata": {
+        "canal_id": "1433867644246949908",
+        "canal_nome": "cliente-marina-tiete",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:25:58.3791779-03:00"
+      }
+    },
+    {
+      "id": 13,
+      "palavras_chave": [
+        "comandos"
+      ],
+      "problema": "Comandos",
+      "solucao": "ctrl + shift + q - entra no branco (fiscal)\nctrl + shift + f - alterna entre usuario vermelho (n fiscal)\n\nwindows + L deixa modo suspenso\n\nDAV\n\nf11 encerra \n\nCTRL + P - gerar a nota nfce\n\nCTRL + N -  gerar nfe\n\nctrl + insert - faz uma copia (caracteristicas etc)\nctrl + n - gera uma nota nova\n\nCTRL + K - IMPRIMIR VISUALIZAÃ‡ÃƒO DE DAV\n\n**LOJA CONWER**\n\nUSAM F9 (para abrir a tela de itens) e clicam CTRL + SHIFT + F11 (vai abrir uma tela mostrando as filiais e quantidades de itens\n\n**ATALHO PARA CANCELAR UM PEDIDO NO COMERCIAL > PEDIDOS**\n\nCTRL + SHIFT + Z PARA CANCELAR PEDIDOS SEM IMPRIMIR NOTA",
+      "tags": [
+        "âš ï¸ANOTAÃ‡Ã•ES",
+        "comandos"
+      ],
+      "metadata": {
+        "canal_id": "1412416862574219295",
+        "canal_nome": "comandos",
+        "total_mensagens": 7,
+        "data_export": "2026-02-03T10:25:54.7006707-03:00"
+      }
+    },
+    {
+      "id": 14,
+      "palavras_chave": [
+        "link",
+        "khelpdesk"
+      ],
+      "problema": "Link Khelpdesk",
+      "solucao": "Bom dia, pessoal. Tudo bem?\n\nComo sabem, o AnyDesk vem apresentando limitaÃ§Ãµes em relaÃ§Ã£o a mÃºltiplas sessÃµes simultÃ¢neas. Pensando nisso, buscamos uma alternativa que atendesse melhor nossas necessidades e encontramos o KHelpDesk.\n\nA partir de agora, utilizaremos o KHelpDesk em conjunto com o AnyDesk, conforme a necessidade de cada atendimento.\n\nPara facilitar o acesso dos clientes, disponibilizaremos um link que jÃ¡ inicia o download automaticamente. O cliente sÃ³ precisarÃ¡ executar o arquivo .exe baixado â€“ sem instalaÃ§Ãµes complicadas.\n\nTambÃ©m estou deixando abaixo o link da versÃ£o que nÃ³s, do suporte, utilizaremos para realizar as conexÃµes, pois o primeiro link Ã© exclusivo para o cliente (lado que recebe o acesso).\n\nDownload para o Cliente (receber acesso)\nhttps://painel.khelpdesk.com.br/ws/public/api/v1/clients/download/khd660f0bffd0b0d979387341528/exe/600\n\nDownload para o Suporte (realizar acesso)\nhttps://khelpdesk.com.br/downloads/novo/KHelpDesk.exe?v=50.24",
+      "tags": [
+        "âš ï¸ANOTAÃ‡Ã•ES",
+        "link",
+        "khelpdesk"
+      ],
+      "metadata": {
+        "canal_id": "1429903443790921869",
+        "canal_nome": "link-khelpdesk",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:25:53.1054998-03:00"
+      }
+    },
+    {
+      "id": 15,
+      "palavras_chave": [
+        "login",
+        "web"
+      ],
+      "problema": "Login Web",
+      "solucao": "https://erp.inovarsistemas.com/\nERP | Inovar Sistemas\nInovar Sistemas\n\nEntrar no \" SUPORTE INOVAR \"\nLogin: suporte@inovarsistemas.com\nSenha: Rkccro2020$\nEsse seria o e-mail e a senha do nosso teste do Web.",
+      "tags": [
+        "âš ï¸ANOTAÃ‡Ã•ES",
+        "login",
+        "web"
+      ],
+      "metadata": {
+        "canal_id": "1414968292698882048",
+        "canal_nome": "login-web",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:25:56.4870744-03:00"
+      }
+    },
+    {
+      "id": 16,
+      "palavras_chave": [
+        "erro",
+        "backup",
+        "error"
+      ],
+      "problema": "Erro Backup Error 32",
+      "solucao": "Qualquer erro na hora do backup com este cÃ³digo realizar o seguinte procedimento:\n\n1- Acessar C:\\Backup\\Files\n\n2- Apagar todos os arquivos .txt que estÃ£o nesta pasta.\n\n**OBS: NÃ£o apagar as pastas que estÃ£o dentro deste caminho apenas os arquivos e gerar o backup novamente.**\n\n**Isso ocorre porque o backup foi iniciado e interrompido no meio por algum motivo, entÃ£o Ã© necessÃ¡rio apagar os arquivos do iniciado para que um novo possa ser realizado.**",
+      "tags": [
+        "âŒERROS",
+        "erro",
+        "backup",
+        "error"
+      ],
+      "metadata": {
+        "canal_id": "1431242762346430494",
+        "canal_nome": "erro-backup-error-32",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:24:56.837354-03:00"
+      }
+    },
+    {
+      "id": 17,
+      "palavras_chave": [
+        "erro",
+        "cnpj",
+        "autorizado",
+        "download"
+      ],
+      "problema": "Erro Cnpj Autorizado Download",
+      "solucao": "QUANDO ACONTECER ESSE ERRO :\n\nIR EM : FISCAL > AUXILIARES > AUTORIZADOS PARA DOWNLOAD NFE  e selecionar a nota",
+      "tags": [
+        "âŒERROS",
+        "erro",
+        "cnpj",
+        "autorizado"
+      ],
+      "metadata": {
+        "canal_id": "1419695510582984715",
+        "canal_nome": "erro-cnpj-autorizado-download",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:24:53.8102714-03:00"
+      }
+    },
+    {
+      "id": 18,
+      "palavras_chave": [
+        "erro",
+        "inscriÃ§Ã£o",
+        "estadual"
+      ],
+      "problema": "Erro InscriÃ§Ã£o Estadual",
+      "solucao": "NORMALMENTE quando ocorre erros com inscriÃ§Ãµes estudais sempre: \n\n- Consultar o CNPJ no sintegra\n- Verificar o erro, caso a empresa nÃ£o tenha i.e registrada sempre ir em: cadastro do cliente, localizar ele, alterar e apagar a i.e\n- NÃƒO ESQUECER de preencher a caixinha em baixo como 'NÃƒO\" \n- Salvar",
+      "tags": [
+        "âŒERROS",
+        "erro",
+        "inscriÃ§Ã£o",
+        "estadual"
+      ],
+      "metadata": {
+        "canal_id": "1437889471696732160",
+        "canal_nome": "erro-inscriÃ§Ã£o-estadual",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:24:58.5027993-03:00"
+      }
+    },
+    {
+      "id": 19,
+      "palavras_chave": [
+        "erro",
+        "out",
+        "system"
+      ],
+      "problema": "Erro Out Of System",
+      "solucao": "QUANDO ACONTECER ESTE ERRO : \" out of system \"\n\n1- Acessar mÃ¡quina do cliente\n2- Verificar resoluÃ§Ã£o da tela ( colocar geralmente 1920 x 1080)\n3- Verificar a escala que ele estÃ¡ utilizando  (colocar 100%)\n\nGeralmente este erro Ã© por conta da resoluÃ§Ã£o, o sistema de Vendas Ã© dependente do tipo de resoluÃ§Ã£o.\n.\n\n**Quando mudar a resoluÃ§Ã£o, clica no Ã­cone do meio do lado onde fecha o sistema (ali onde estÃ¡ circulado em verde)**",
+      "tags": [
+        "âŒERROS",
+        "erro",
+        "out",
+        "system"
+      ],
+      "metadata": {
+        "canal_id": "1433439534875672586",
+        "canal_nome": "erro-out-of-system",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:24:55.2934175-03:00"
+      }
+    },
+    {
+      "id": 20,
+      "palavras_chave": [
+        "erro",
+        "sem",
+        "conexÃ£o",
+        "com",
+        "banco"
+      ],
+      "problema": "Erro Sem ConexÃ£o Com Banco",
+      "solucao": "**QUANDO ACONTECER ISSO :**\n\n**VAI EM:**  \n**1-** GERENCIADOR DE TAREFAS > CLICA EM SERVIÃ‡OS > CLICA EM DESCRIÃ‡ÃƒO > SÃ“ DIGITAR \" MARIADB \", **(geralmente o serviÃ§o vai estar como \"parado\", aÃ­ Ã© sÃ³ clicar com botÃ£o direito em cima do MARIADB e clicar em \" iniciar \")**",
+      "tags": [
+        "âŒERROS",
+        "erro",
+        "sem",
+        "conexÃ£o"
+      ],
+      "metadata": {
+        "canal_id": "1425926340355428493",
+        "canal_nome": "erro-sem-conexÃ£o-com-banco",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:25:01.2841465-03:00"
+      }
+    },
+    {
+      "id": 21,
+      "palavras_chave": [
+        "erro",
+        "sistema",
+        "nÃ£o",
+        "registrado"
+      ],
+      "problema": "Erro Sistema NÃ£o Registrado",
+      "solucao": "**QUANDO ACONTECER ESSE TIPO DE ERRO, Ã‰ PORQUE O \" INI \" CORROMPEU**\n\nOque deve ser feito:\n\n**PRIMEIRAMENTE IDENTIFICAR QUAL DOS SISTEMAS CORROMPEU O INI (pra saber isso Ã© so ver qual sistema estÃ¡ dando essa mensagem).**\n\nApÃ³s identificar qual dos sistemas corrompeu (**se caso os 2 comrromperam nÃ£o tem problema, sÃ³ fazer os passos para os 2 sistemas**):\n\n1- Acessa algum outro computador do cliente que esteja com o sistema funcionando\n\n2- Vai em cima do Ã­cone do sistema, clica com o botÃ£o direito > clica em \" propriedades \" > clica em \" local do arquivo \"\n\n-\n3- Clica na coluna \" Data modificaÃ§Ã£o \" > acha o INI do **COMERCIAL** ou do **VENDAS**\ncoloquei as imagens do arquivo que deve achar,  Ã© esse arquivo ali, as vezes ele aparece o \".ini\" junto do nome e as vezes nÃ£o, nÃ£o tem problema.\n\n4- Depois de achar esse arquivo, copia ele para o seu computador e acessa o outro computador que **ESTÃ COM PROBLEMA**.\n\n**NO COMPUTADOR QUE ESTÃ COM INI CORROMPIDO:**\n\n1- Vai em cima do Ã­cone do sistema, clica com o botÃ£o direito > clica em \" propriedades \" > clica em \" local do arquivo \"\n\n2- Clica na coluna \" Data modificaÃ§Ã£o \" > acha o INI do **COMERCIAL** ou do **VENDAS** (depende do sistema que vocÃª estÃ¡ ajustando)\n\n3-  Exclui esse INI que jÃ¡ estÃ¡ na pasta e cola o **INI QUE VOCÃŠ PEGOU DO OUTRO COMPUTADOR** (**INI QUE ESTÃ FUNCIONANDO**)\n\n4- Vai na Pasta \" Inovar Sistemas \" > clica no programa \" Configurar Sistema \"\n\n5- Configura o INI, para configurar vocÃª coloca o nome do HOST= NOMECOMPUTADORSERVIDOR (coloca o nome do computador servidor)\n6- Configurando o INI ainda, vocÃª muda em Numero = NUMEROCOMPUTADOR (tem que colocar um numero diferente, pode ser aleatorio)\n\n7- E pronto, estÃ¡ configurado e ajustado, para garantir, inicia o sistema para ver se vai funcionar perfeitamente.",
+      "tags": [
+        "âŒERROS",
+        "erro",
+        "sistema",
+        "nÃ£o"
+      ],
+      "metadata": {
+        "canal_id": "1446499502931316806",
+        "canal_nome": "erro-sistema-nÃ£o-registrado",
+        "total_mensagens": 6,
+        "data_export": "2026-02-03T10:24:52.0456463-03:00"
+      }
+    },
+    {
+      "id": 22,
+      "palavras_chave": [
+        "cadastrar",
+        "cfop"
+      ],
+      "problema": "Cadastrar Cfop",
+      "solucao": "**Para cadastrar um CFOP vai em :**\n\n**OBS : toda e qualquer informaÃ§Ã£o fiscal independente de qual seja, tem que ser orientado primeiramente pela contabilidade do cliente.**\n\nFiscal >  Auxiliares >  CFOP",
+      "tags": [
+        "â“CFOP",
+        "cadastrar",
+        "cfop"
+      ],
+      "metadata": {
+        "canal_id": "1430175776543740085",
+        "canal_nome": "cadastrar-cfop",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:21:47.286657-03:00"
+      }
+    },
+    {
+      "id": 23,
+      "palavras_chave": [
+        "situacao",
+        "cfop"
+      ],
+      "problema": "Situacao Cfop",
+      "solucao": "se caso o cliente insistir em fazer com um cfop que nÃ£o faz sentido\n\nvaai em fiscal > nfe > localizar > localiza a nota que ele quer fazer\n\nclica \" CTRL + INSERT \" pra fazer uma copia da nota e muda o CFOP E A NATUREZA DA OPERAÃ‡ÃƒO\n\n*SE MUDAR O CFOP, VAI NO SITENS E CLICA \" CTRL + A \" pra mudar todos os cfops dos itens",
+      "tags": [
+        "â“CFOP",
+        "situacao",
+        "cfop"
+      ],
+      "metadata": {
+        "canal_id": "1415349370848804916",
+        "canal_nome": "situacao-cfop",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:21:45.5812149-03:00"
+      }
+    },
+    {
+      "id": 24,
+      "palavras_chave": [
+        "csosn",
+        "101"
+      ],
+      "problema": "Csosn 101",
+      "solucao": "TEM QUE ALTERAR O CLIENTE PARA \"CONSUMIDOR NORMAL\"",
+      "tags": [
+        "â“CSOSN",
+        "csosn",
+        "101"
+      ],
+      "metadata": {
+        "canal_id": "1418576830708977795",
+        "canal_nome": "csosn-101",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:21:44.1674103-03:00"
+      }
+    },
+    {
+      "id": 25,
+      "palavras_chave": [
+        "criar",
+        "composiÃ§Ã£o",
+        "item"
+      ],
+      "problema": "Criar ComposiÃ§Ã£o No Item",
+      "solucao": "1- Acessa o produto que quer criar a composiÃ§Ã£o\n2- Altera o tipo de cadastro para \" COMPOSTO \" ( na parte de cima ta escrito \" Tipo de cadastro \")\n3- ApÃ³s fazer isso vai adicionar a aba de ComposiÃ§Ã£o. (do lado de \" Fotos \")\n\n4- Pode clicar em \" ComposiÃ§Ã£o \", apÃ³s isso clicar em \" Clique aqui para adicionar uma nova linha \"\n\n5- Clica na parte branca ali em baixo de \" CÃ³digo \", vai aparecer o \" F2 \", clica no \" F2 \" e seleciona  a composiÃ§Ã£o.\n\n6- Quando selecionar a composiÃ§Ã£o, adiciona as informaÃ§Ãµes que forem necessÃ¡rias e clica a tecla \" Enter \" atÃ© a composiÃ§Ã£o baixar.\n**(Pode clicar enter atÃ© essa composiÃ§Ã£o baixar, ela sÃ³ vincula no produto se baixar.)**\n\nApÃ³s isso, clicar em \" SALVAR \"",
+      "tags": [
+        "ðŸ” PEDIDOS / LANCHONETES",
+        "criar",
+        "composiÃ§Ã£o",
+        "item"
+      ],
+      "metadata": {
+        "canal_id": "1440327739138904064",
+        "canal_nome": "criar-composiÃ§Ã£o-no-item",
+        "total_mensagens": 5,
+        "data_export": "2026-02-03T10:24:47.0420802-03:00"
+      }
+    },
+    {
+      "id": 26,
+      "palavras_chave": [
+        "permissao",
+        "alterar",
+        "composicao",
+        "pedido"
+      ],
+      "problema": "Permissao Alterar Composicao No Pedido",
+      "solucao": "Local onde permite ou nÃ£o permite Exibir a composiÃ§Ã£o na hora do pedido para alterar se quer tirar alguma coisa da composiÃ§Ã£o\n\n**Exemplo: Tenho um hamburguer que tem carne, alface e tomate, na hora da venda quero tirar o tomate, para poder retirar na hora da venda tem que ter esse campo permitido, pois quando ela for colocar esse hamburguer, na hora da venda vai aparecer uma tela pra habilitar ou desabilitar.\nÃ‰ bem Ãºtil porque pode ser que o cliente queira tirar alguma coisa do hamburguer e se caso nÃ£o retirar, o estoque vai ficar errado.**\n\nQuando o **EXIBIR MONTAGEM** estÃ¡ **ATIVO**, na hora de emitir o pedido, quando ele coloca o produto vai abrir essa tela para clicar ali para tirar ou habilitar a composiÃ§Ã£o, no meu exemplo coloquei sÃ³ um guaranÃ¡ de teste.\n\n**Para criar o pedido seria dessa forma:**\n\n1\n\n2 seleciona a mesa que quer\n\n3 coloca o item\n\n4 se o exibir montagem estiver ativo, vai abrir direto essa tela",
+      "tags": [
+        "ðŸ” PEDIDOS / LANCHONETES",
+        "permissao",
+        "alterar",
+        "composicao"
+      ],
+      "metadata": {
+        "canal_id": "1440320034189742221",
+        "canal_nome": "permissao-alterar-composicao-no-pedido",
+        "total_mensagens": 7,
+        "data_export": "2026-02-03T10:24:01.5007679-03:00"
+      }
+    },
+    {
+      "id": 27,
+      "palavras_chave": [
+        "permissao",
+        "baixa",
+        "estoque"
+      ],
+      "problema": "Permissao Baixa Estoque",
+      "solucao": "Na parte de \" PRODUTO \", se deixar como  \" NÃƒO \" ele nÃ£o vai dar baixa no produto. (exemplo: se o cliente nao tem o hamburguer no estoque nao tem pq dar baixar no produto hamburguer).\n\nNa parte de \" COMPOSIÃ‡ÃƒO \", Se deixar como \" NÃƒO \" ele nÃ£o vai dar baixa nas composiÃ§Ãµes, ou seja, quando ele fazer uma venda nÃ£o vai baixar o estoque das composiÃ§Ãµes, se o cliente quer cadastrar composiÃ§Ã£o, ele vai querer que dÃª baixa.\n\nApÃ³s isso, clicar em \" SALVAR \"",
+      "tags": [
+        "ðŸ” PEDIDOS / LANCHONETES",
+        "permissao",
+        "baixa",
+        "estoque"
+      ],
+      "metadata": {
+        "canal_id": "1440341339584598077",
+        "canal_nome": "permissao-baixa-estoque",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:23:59.857897-03:00"
+      }
+    },
+    {
+      "id": 28,
+      "palavras_chave": [
+        "visualizar",
+        "etiquetas"
+      ],
+      "problema": "Visualizar Etiquetas",
+      "solucao": "**PARA VISUALIZAR MODELOS DE ETIQUETAS QUE ATENDAM A NECESSIDADE DO CLIENTE: **\nPODE IR NO SITE AJUDA INOVAR (https://ajuda-inovar-sistemas.gitbook.io/ajuda-inovar-sistemas)\n1- Vai em COMERCIAL \n2-ETIQUETAS E SELECIONA ATE ACHAR ALGUMA QUE ATENDA O CLIENTE\n\n**DICAS:**\n- Pode pedir alguma referÃªncia pro cliente e procurar alguma parecida\n- Verifica oque aparece nas etiquetas e vai vendo se o cliente quer que apareÃ§a, tipo tamanho do item, local onde aparece o preÃ§o etc\n- Geralmente se achar uma etiqueta semelhante a referÃªncia que o cliente mandou eles aceitam\n- Caso o cliente nÃ£o mande referÃªncia de etiqueta, pega uma e manda para ele questionando se pode ser daquele modelo (ele vai aprovar ou dizer oque precisa)\n\n**PARA ADICIONAR A ETIQUETA E FAZER IMPRESSÃƒO ( TANTO PARA TESTAR QUANTO O CAMINHO PARA IMPRIMIR ELAS SE CLIENTE PEDIR)**\n\n1- Vai em PRODUTOS > ETIQUETAS > SELECIONA A ETIQUETA QUE QUER (CADA ETIQUETA TEM SEU NOME CERTINHO)\n2- Clica em LOCALIZAR ou F2 > ESCOLHE QUALQUER PRODUTO (Ã‰ APENAS PARA TESTE) > CLICA NA PARTE DA DIREITA EM  \"01 - 05\"\n3- E CLICA NO **\"A\"** do lado de  \"imprimir - F8\" para **SELECIONAR A FONTE**\n4- e depois clica em \"**imprimir - F8**\"\n\n**Depois sÃ³ ensinar esse caminho pra cliente imprimir as futuras etiquetas**\n\n**DICAS: **\n- QUANDO FOR TROCAR O PRODUTO TEM QUE CLICAR EM \" LIMPAR \"",
+      "tags": [
+        "ðŸ·ï¸ETIQUETAS",
+        "visualizar",
+        "etiquetas"
+      ],
+      "metadata": {
+        "canal_id": "1417838292715704322",
+        "canal_nome": "visualizar-etiquetas",
+        "total_mensagens": 4,
+        "data_export": "2026-02-03T10:20:42.4096922-03:00"
+      }
+    },
+    {
+      "id": 29,
+      "palavras_chave": [
+        "criar",
+        "contas",
+        "receber"
+      ],
+      "problema": "Criar Contas Receber",
+      "solucao": "1- IR EM FINANCEIRO > CONTAS A RECEBER \n2- INCLUI O CLIENTE (RAZAO SOCIAL/NOME) \n3- IR EM ATALHOS > INCLUIR > NO TOTAL, COLOCA O TOTAL DOS 12 MESES \n4- CLICA EM F2 NO \"PRAZO DE PAGAMENTO\",  COLOCAR PRAZO DE PAGAMENTO(12X) \n5- DEPOIS ALI EM BAIXO ELE VAI CRIAR AS 12 PARCELAS > CLICAR EM CONFIRMAR.\n\n\n**OBS: SE NAO TIVER O PRAZO DE 12X, CRIAR O PRAZO**\n** PARA CRIAR PRAZO: **IR EM FINANCEIRO > PRAZO DE PAGAMENTO > INCLUIR > DESC BOTA \" 12X \" > CLICA EM MENSAL E COLOCA \" 12 \"> SALVAR.\n\nPARA LIQUIDAR :\n\nVAI EM FINANCEIRO > CONTAS A PAGAR > LIQUIDAÃ‡ÃƒO",
+      "tags": [
+        "ðŸ’³ CONTAS / CREDIARIO",
+        "criar",
+        "contas",
+        "receber"
+      ],
+      "metadata": {
+        "canal_id": "1420424526956724315",
+        "canal_nome": "criar-contas-receber",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:23:52.0959275-03:00"
+      }
+    },
+    {
+      "id": 30,
+      "palavras_chave": [
+        "criar",
+        "credito",
+        "cliente"
+      ],
+      "problema": "Criar Credito P Cliente",
+      "solucao": "PODE IR NO CONTAS A PAGAR E AÃ COLOCAR VALOR NEGATIVO TIPO : \" -R$100 \"",
+      "tags": [
+        "ðŸ’³ CONTAS / CREDIARIO",
+        "criar",
+        "credito",
+        "cliente"
+      ],
+      "metadata": {
+        "canal_id": "1422568763483623537",
+        "canal_nome": "criar-credito-p-cliente",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:23:53.7628989-03:00"
+      }
+    },
+    {
+      "id": 31,
+      "palavras_chave": [
+        "estornar",
+        "crediario"
+      ],
+      "problema": "Estornar Crediario",
+      "solucao": "**PARA ESTORNAR CREDIARIO:** \n1- Vai em financeiro > contas a receber \n2- Localiza cliente > da dois cliques no valor parcial \n3- Clica em estornar, QUANDO CLICAR VAI ESTORNAR O VALOR PARCIAL E ESSE VALOR APARECE COMO ESTORNADO NO CAIXA.",
+      "tags": [
+        "ðŸ’³ CONTAS / CREDIARIO",
+        "estornar",
+        "crediario"
+      ],
+      "metadata": {
+        "canal_id": "1422676910818984016",
+        "canal_nome": "estornar-crediario",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:23:58.1010811-03:00"
+      }
+    },
+    {
+      "id": 32,
+      "palavras_chave": [
+        "liq",
+        "cont",
+        "receb",
+        "web",
+        "parci"
+      ],
+      "problema": "Liq Cont Receb Web Parci",
+      "solucao": "Quando tiver uma CONTAS a RECEBER para quitar parcialmente\n\n1- Pode ir em CONTAS A RECEBER > SELECIONA AS PARCELAS QUE VÃƒO PRÃ“XIMAS AO VALOR TOTAL QUE ELE QUER PAGAR\n2- CLICAR EM PAGAMENTO > REPARCELAR > (se nÃ£o tiver forma de pagamento 2x pode ir em FINANCEIRO > PRAZOS PAGAMENTO e cria.)\n3-  Coloca o prazo que quer ou o que cadastrou novo\n4- Forma de Pagamento coloca 1 ou qualquer outra\n5- E ali em baixo onde mostra as parcelas, colocar o valor cheio do quanto ele quer pagar parcialmente, ex: R$400,00, Coloca uma parcela com o valor que ele quer quitar.\n6- Clica em confirmar e liquida depois.",
+      "tags": [
+        "ðŸ’³ CONTAS / CREDIARIO",
+        "liq",
+        "cont",
+        "receb"
+      ],
+      "metadata": {
+        "canal_id": "1430199549473067131",
+        "canal_nome": "liq-cont-receb-web-parci",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:23:55.8731012-03:00"
+      }
+    },
+    {
+      "id": 33,
+      "palavras_chave": [
+        "erro",
+        "exportando",
+        "xml"
+      ],
+      "problema": "Erro Exportando Xml",
+      "solucao": ".\n\n**O que precisa ser feito Ã© preencher a impressora nos campos que ainda nÃ£o tÃªm nada colocado.**\n\n1- Ir no sistema  Comercial, clicar no atalho \" CTRL + SHIFT + F\"  (pra poder acessar o ConfiguraÃ§Ãµes do sistema). \n2- IR EM CONFIG NF1  > LÃ EM BAIXO em CONFIG NFC-E: **ALTERAR IMPRESSORA**  e no CARNÃŠ > **ALTERAR IMPRESSORA**,  BOTAR QUALQUER OPÃ‡ÃƒO DE IMPRESSORA\n3- Depois de feito clicar em SALVAR > VAI DAR CERTO.\n\nPreencher somente campos vazios, nÃ£o fazer a alteraÃ§Ã£o dos demais jÃ¡ preenchidos",
+      "tags": [
+        "ðŸ“</xml>",
+        "erro",
+        "exportando",
+        "xml"
+      ],
+      "metadata": {
+        "canal_id": "1417561720981028884",
+        "canal_nome": "erro-exportando-xml",
+        "total_mensagens": 3,
+        "data_export": "2026-02-03T10:22:56.3143069-03:00"
+      }
+    },
+    {
+      "id": 34,
+      "palavras_chave": [
+        "gerar",
+        "xml",
+        "nfc",
+        "nfe"
+      ],
+      "problema": "Gerar Xml Nfc Ou Nfe",
+      "solucao": "1- No sistema comercial, ir em: \n\n2- Clicar em fiscal â†’ Envio de arquivo de NFC-e (se precisar)\n\n3- Clicar em fiscal â†’ Envio de arquivo de Nfe (se precisar)\n\n4- Preencher a data que precisa â†’ Clicar em exibir \n\n5- Selecionar todos os arquivos clicando na caixinha em branco do lado esquerdo â†’ Clicar em salvar \n\n6- Clicar em ZIP/XML â†’ escolher o local para salvar este arquivo gerado.",
+      "tags": [
+        "ðŸ“</xml>",
+        "gerar",
+        "xml",
+        "nfc"
+      ],
+      "metadata": {
+        "canal_id": "1415376700296138824",
+        "canal_nome": "gerar-xml-nfc-ou-nfe",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:22:54.6871511-03:00"
+      }
+    },
+    {
+      "id": 35,
+      "palavras_chave": [
+        "list",
+        "bounds"
+      ],
+      "problema": "List Of Bounds",
+      "solucao": "QUANDO DER ESSE ERRO MUDANDO IMPRESSORA Ã‰ PQ TEM ALGUM LUGAR QUE A IMPRESSORA NAO TA SELECIONADA",
+      "tags": [
+        "ðŸ“</xml>",
+        "list",
+        "bounds"
+      ],
+      "metadata": {
+        "canal_id": "1433186086603063316",
+        "canal_nome": "list-of-bounds",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:23:44.1215012-03:00"
+      }
+    },
+    {
+      "id": 36,
+      "palavras_chave": [
+        "cancelar",
+        "entrada",
+        "notas"
+      ],
+      "problema": "Cancelar Entrada De Notas",
+      "solucao": "**VERIFICAR COM O CLIENTE SE ELE LANÃ‡OU A NOTA NO BONECO VERMELHO OU NO BRANCO, SE LANÃ‡OU NO BRANCO (FISCAL) TEM QUE CANCELAR NOS DOIS BONECOS, SE LANÃ‡OU SÃ“ NO VERMELHO, TEM QUE CANCELAR SÃ“ NO (VERMELHO)**\n\n**1-** Para cancelar, pode clicar no botÃ£o \" **CANCELAR** \".\n\n**2-** Precisa acessar o sistema pelo boneco branco (**CTRL + SHIFT + Q**), localizar a nota de entrada que quer cancelar e cancelÃ¡-la. \n\n**3-** Em seguida, vai no boneco vermelho (**CTRL + SHIFT + F**), acha a nota de  entrada que quer cancelar e cancela tambÃ©m. \n\n**DEPOIS DE REALIZAR O CANCELAMENTO NOS DOIS BONECOS, PODE LANÃ‡AR NOVAMENTE A NOTA.**",
+      "tags": [
+        "ðŸ“¥NF DE ENTRADA",
+        "cancelar",
+        "entrada",
+        "notas"
+      ],
+      "metadata": {
+        "canal_id": "1440385972553388104",
+        "canal_nome": "cancelar-entrada-de-notas",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:23:48.1937147-03:00"
+      }
+    },
+    {
+      "id": 37,
+      "palavras_chave": [
+        "erro",
+        "floating",
+        "point"
+      ],
+      "problema": "Erro Floating Point",
+      "solucao": "Quando der esse erro, tem que apagar os grids",
+      "tags": [
+        "ðŸ“¥NF DE ENTRADA",
+        "erro",
+        "floating",
+        "point"
+      ],
+      "metadata": {
+        "canal_id": "1446135364656828427",
+        "canal_nome": "erro-floating-point",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:23:49.9856854-03:00"
+      }
+    },
+    {
+      "id": 38,
+      "palavras_chave": [
+        "nota",
+        "entrada",
+        "produtos"
+      ],
+      "problema": "Nota De Entrada De Produtos",
+      "solucao": "vai no site da receita (fazenda : https://www.nfe.fazenda.gov.br/), pegar xml da nota(clica em seleciona cnpj do cliente\"download de documento\".\n\nsitema\n1Â°- produtos > movimentacao > entrada de produto > CNTRL + P > itens/fatura > ver com cliente se ja tem o item ali ou tem que cadastrar, se tiver que cadastrar clia no \"+\", se ja tiver ali clica 2x no item.\n\n*Caso seja um item que seja em metro algo assim, clicar em \"fat conversÃ£o\"*\n\n2Â°- Clicar em \"Confirmar\"\n\nCaso de uma pergunta se quer alterar preÃ§o, ela pode alterar se quiser, isso se aplica em situaÃ§Ã£o tipo, se for um produto novo que cadastrou agora nÃ£o precisa, mais se for um produto antigo que ela altera muitas vezes e quer alterar o valor pra ficar atualizado.\n\n3Â°- Encerrar a nota, porque Ã© sÃ³ uma movimentaÃ§Ã£o de produto.\nDepois de encerrar estÃ¡ feito.",
+      "tags": [
+        "ðŸ“¥NF DE ENTRADA",
+        "nota",
+        "entrada",
+        "produtos"
+      ],
+      "metadata": {
+        "canal_id": "1414961776608415804",
+        "canal_nome": "nota-de-entrada-de-produtos",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:23:46.5309156-03:00"
+      }
+    },
+    {
+      "id": 39,
+      "palavras_chave": [
+        "ajustar",
+        "estoque",
+        "negativo"
+      ],
+      "problema": "Ajustar Estoque Negativo",
+      "solucao": "Para ajustar um produto com estoque negativo, vocÃª pode fazer assim :\n\nPrimeiro mostra pro cliente como estÃ¡ a movimentaÃ§Ã£o dos produtos dele\n\ntem duas formas :\n\nSeria uma verificaÃ§Ã£o de como tÃ¡ a movimentaÃ§Ã£o do produto, quando teve entrada, quantas vezes saiu\nPRODUTOS > CONSULTAS > MOVIMENTAÃ‡ÃƒO DE PRODUTOS INDIVIDUAL\n\nAqui seria um relatÃ³rio geral do estoque de todos os produtos, entÃ£o da pra ver todos que estÃ£o negativos, zerados etc\nRELATÃ“RIOS > PRODUTOS > ESTOQUE\n\nPara ajustar, pode ir nesse caminho:\nAnalisando tudo isso, pode ir em: PRODUTOS > MOVIMENTAÃ‡ÃƒO > AJUSTE NO ESTOQUE\n\nDentro do ajuste de estoque, primeiro passo Ã© clicar ali em baixo em \" Incluir \" > coloca o tipo se Ã© entrada ou saida > no Historico coloca o porque do ajuste > clicar em \" Salvar \".\n\nDepois de clicar em \" Salvar \"\nClica no \" F2\" ali em produtos, seleciona o produto e em \" Quantidade \" coloca a quantidade do produto ( lembrando que se o produto estiver negativo, ex: -2 e vocÃª tem 8 unidades em casa, vocÃª tem que colocar 10unds, pois Ã© uma operaÃ§Ã£o matemÃ¡tica, vocÃª colocando 10uns o sistema vai retirar os 2 negativos e deixar 8unds, Ã© nessa lÃ³gica.\n\nFinalizando isso e os produtos sÃ³ clica em \" Encerrar\"\n\nMovimentaÃ§Ã£o individual\n\nRelatÃ³rio de estoque\n\nAjuste",
+      "tags": [
+        "ðŸ“¦PRODUTOS / ESTOQUE",
+        "ajustar",
+        "estoque",
+        "negativo"
+      ],
+      "metadata": {
+        "canal_id": "1428360883700105280",
+        "canal_nome": "ajustar-estoque-negativo",
+        "total_mensagens": 4,
+        "data_export": "2026-02-03T10:21:40.7020044-03:00"
+      }
+    },
+    {
+      "id": 40,
+      "palavras_chave": [
+        "cadastro",
+        "produto"
+      ],
+      "problema": "Cadastro De Produto",
+      "solucao": "QUANDO CRIAR UM CADASTRO DE PRODUTO Ã‰ ACONSELHADO CRIAR COMO CÃ“PIA, PARA PUXAR OS DADOS FISCAIS DE OUTRO PRODUTO, QUANDO NÃƒO TEM DA CONTABILIDADE\n\nVAI EM PRODUTO >  CADASTRO > VAI ABRIR A TELA DE PRODUTOS E SELECIONA UM QUE QUEIRA COPIAR, FAZ CTRL + INSERT",
+      "tags": [
+        "ðŸ“¦PRODUTOS / ESTOQUE",
+        "cadastro",
+        "produto"
+      ],
+      "metadata": {
+        "canal_id": "1428010891026370621",
+        "canal_nome": "cadastro-de-produto",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:21:39.1512077-03:00"
+      }
+    },
+    {
+      "id": 41,
+      "palavras_chave": [
+        "lanÃ§amento",
+        "balanÃ§o"
+      ],
+      "problema": "LanÃ§amento BalanÃ§o",
+      "solucao": "VAI EM : PRODUTOS > MOVIMENTAÃ‡ÃƒO > BALANÃ‡O > INICIAR > SELECIONA SE QUER POR GRUPO OU POR QUAL",
+      "tags": [
+        "ðŸ“¦PRODUTOS / ESTOQUE",
+        "lanÃ§amento",
+        "balanÃ§o"
+      ],
+      "metadata": {
+        "canal_id": "1421107380627836928",
+        "canal_nome": "lanÃ§amento-balanÃ§o",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:20:50.2176905-03:00"
+      }
+    },
+    {
+      "id": 42,
+      "palavras_chave": [
+        "produto",
+        "nÃ£o",
+        "aparece"
+      ],
+      "problema": "Produto NÃ£o Aparece",
+      "solucao": "Sempre quando acontecer algo relacionado, onde vocÃª cadastrou um produto mas ele nÃ£o aparece quando vai gerar uma nota, vocÃª pode fazer uma conferÃªncia de ir em : PRODUTOS > CADASTRO > LOCALIZAR O PRODUTO QUE QUER VERIFICAR > CLICA EM \"ADICIONAIS\"\n\nE verifica onde estÃ¡ o quadrado vermelho sobre a situaÃ§Ã£o do produto, se estiver INATIVO Ã© como se o produto nÃ£o existisse no sistema, aÃ­ se estiver INATIVO, podes clicar e mudar para ATIVO, para aparecer no sistema\n\nAlterando a situaÃ§Ã£o para \" ATIVO \" jÃ¡ vai aparecer no sistema",
+      "tags": [
+        "ðŸ“¦PRODUTOS / ESTOQUE",
+        "produto",
+        "nÃ£o",
+        "aparece"
+      ],
+      "metadata": {
+        "canal_id": "1422194650566889597",
+        "canal_nome": "produto-nÃ£o-aparece",
+        "total_mensagens": 3,
+        "data_export": "2026-02-03T10:21:42.5121018-03:00"
+      }
+    },
+    {
+      "id": 43,
+      "palavras_chave": [
+        "erro",
+        "email",
+        "config"
+      ],
+      "problema": "Erro Email Config",
+      "solucao": "Erro do e-mail, para atualizar nos clientes quando ocorrer o erro abaixo:\n\na nova senha Ã© : **aoqc ixue bjgg usum**\n\nSERVIDOR SMTP : **smtp.gmail.com**\n\ntem uma opÃ§Ã£o na NF-e que Ã© \"**Configurar email**\"\n\no resto pode deixar tudo igual, **sÃ³ alterar a senha. **\n\nFiscal > NFE > OperaÃ§Ãµes > Configurar Email\n\nVALE PARA XML TAMBÃ‰M\n\nQuando der erro relacionado a envio de email\nVai em Explorador de arquivos > Meu computador >  na barra de endereÃ§o digita \" \\suporte2 \" > Marlon > Drivers > DLL Nova > Email\nCopia as DLLS e cola na pasta do comercial, REINICIA O SISTEMA e testa novamente.\n\nCOMANDO PRA ATUALIZAR NO HEIDI O EMAIL CASO A SENHA NÃƒO FUNCIONAR \n\nUPDATE EMPRESANFE SET NFE_HOST='smtp.gmail.com', NFE_PORT=587, NFE_USER='envio@inovarsistemas.com', NFE_PASS='xmsrrvoonsrnolgo', NFE_TLS=1, NFE_SSL=0 WHERE NFE_CODIGO=1;\n\nCONFIGURAR SENHA DE EMAIL\n\nFISCAL > NFE > OPERAÃ‡Ã•ES > CONFIGURAR EMAIL",
+      "tags": [
+        "ðŸ“§ E-MAIL",
+        "erro",
+        "email",
+        "config"
+      ],
+      "metadata": {
+        "canal_id": "1415786520937500713",
+        "canal_nome": "erro-email-config",
+        "total_mensagens": 7,
+        "data_export": "2026-02-03T10:25:49.6428149-03:00"
+      }
+    },
+    {
+      "id": 44,
+      "palavras_chave": [
+        "mudar",
+        "tipo",
+        "impressao",
+        "fechamento",
+        "caixa"
+      ],
+      "problema": "Mudar Tipo De Impressao Fechamento Caixa",
+      "solucao": "QUANDO PRECISAR MUDAR TIPO DE IMPRESSÃƒO DE MODELO DE FECHAMENTO DE CAIXA\n\nUltilitarios > Config Sistema > Outros > Caixa - seleciona tipo de impressÃ£o",
+      "tags": [
+        "ðŸ–¨ï¸IMPRESSORA",
+        "mudar",
+        "tipo",
+        "impressao"
+      ],
+      "metadata": {
+        "canal_id": "1418659244907040939",
+        "canal_nome": "mudar-tipo-de-impressao-fechamento-caixa",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:20:44.0218901-03:00"
+      }
+    },
+    {
+      "id": 45,
+      "palavras_chave": [
+        "rej",
+        "val",
+        "parcel",
+        "maior",
+        "val",
+        "nota"
+      ],
+      "problema": "Rej Val Parcel Maior Q Val Nota",
+      "solucao": "Quando notar estiver rejeitada por valor total de parcela maior que valor total da compra\n\nir banco\nSELECT * FROM nfce WHERE nfc_numero = 4421; (achar a nota pedente)\n\nidentificar a que ta sem protocolo > copiar o \" NFC_CODIGO\"\n\nSELECT * FROM formasnfce WHERE cod_nfce = 7046; (pra ver a forma de pagamento da nfce)\n\nidentificar valor total (verificar se tem desconto)",
+      "tags": [
+        "ðŸš«REJEIÃ‡Ã•ES",
+        "rej",
+        "val",
+        "parcel"
+      ],
+      "metadata": {
+        "canal_id": "1418584431643459584",
+        "canal_nome": "rej-val-parcel-maior-q-val-nota",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:24:50.2851836-03:00"
+      }
+    },
+    {
+      "id": 46,
+      "palavras_chave": [
+        "rejeicao",
+        "modo",
+        "contingencia"
+      ],
+      "problema": "Rejeicao Modo Contingencia",
+      "solucao": "Quando der isso pode ser 3 coisas :\n\n1- SERVIDOR SEFAZ CAIU, (VERIFICAR NO SITE DO SEFAZ)\n2- INTERNET DO CLIENTE CAIU \n3- VAI SER ISSO SE OS DOIS DE CIMA NÃƒO FOR, CERTIFICADO DIGITAL NÃƒO INSTALADO OU VENCIDO.",
+      "tags": [
+        "ðŸš«REJEIÃ‡Ã•ES",
+        "rejeicao",
+        "modo",
+        "contingencia"
+      ],
+      "metadata": {
+        "canal_id": "1428782189830475836",
+        "canal_nome": "rejeicao-modo-contingencia",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:24:48.5331538-03:00"
+      }
+    },
+    {
+      "id": 47,
+      "palavras_chave": [
+        "atualizaÃ§Ã£o",
+        "sistemas"
+      ],
+      "problema": "AtualizaÃ§Ã£o Sistemas",
+      "solucao": "**Antes de mais nada, Ã© necessÃ¡rio perguntar ao cliente quantos computadores com o sistema Inovar ele possui.\nCom a quantidade de computadores confirmada, todos eles devem ser atualizados, sem exceÃ§Ã£o de nenhuma mÃ¡quina.**\n\nPara atualizar:\n\n1- FAZER BACKUP NO SISTEMA COMERCIAL/VENDAS(NFC) **(pc cliente )** |**(importante fazer backup antes para caso dÃª algum problema na atualizaÃ§Ã£o)**\n\n2- ACESSAR FilleZilla (no meu pc) â†’\n\n3- ir do lado de conexao rapida â†’ clicar em ferramentas inovar(a ultima de baixo) â†’ versao teste\n\n4- dois cliques(baixar) â†’ gestao comercial 600 e inovar vendas 100PAF **(se tiver sistema Vendas NFC no pc do cliente)**\n\n5- ir na pasta de diretÃ³rio do comercial no computador do cliente.\n\n6- renomear os arquivos comercial pra data do dia que ta atualizando ex : **(01092025comercial600 e 01092025gestao comercial)**\n\n7- pegar o arquivo que baixou do Filezilla **(o gestao comercial 600 e inovar vendas 100PAF)**, passar pra pasta diretÃ³rio no pc do cliente e extrair **(clicar em sim pra todos)**.",
+      "tags": [
+        "ðŸ› ï¸ðŸ’»INSTALAÃ‡ÃƒO",
+        "atualizaÃ§Ã£o",
+        "sistemas"
+      ],
+      "metadata": {
+        "canal_id": "1412068841034485781",
+        "canal_nome": "atualizaÃ§Ã£o-sistemas",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:20:47.3550095-03:00"
+      }
+    },
+    {
+      "id": 48,
+      "palavras_chave": [
+        "certificado",
+        "digital"
+      ],
+      "problema": "Certificado Digital",
+      "solucao": "Encontrar certificado\n\n1- pesquisar na barra de tarefas: \" opÃ§Ãµes de internet \"  e clica >  entrando na aba, clica em ConteÃºdo > depois clica em Certificados (**p verificar os certificados instalados**).\n\n-Essa etapa 1 Ã© apenas para verificar quais certificados tem instalado, sempre verifica pela \" Data de validade \" do certificado instalado.\n\n2- Pega o certificado e cola na maquina que estÃ¡ sem\n\n4- pega a senha (que geralmente ta no nome do arquivo ja) >executa o arquivo (do certificado) > avanÃ§ar ate pedir a senha> coloca a senha e **marca em opÃ§Ãµes de importaÃ§Ã£o a opÃ§Ã£o \"marcar esta chave como exportÃ¡vel\"** > depois sÃ³ avanÃ§ar em tudo.\n\n5- vai em opÃ§Ãµes de internet novamente pra verificar se estÃ¡ tudo ok, data e tal.\n\n6- vai no sistema > fiscal > NFE > OperaÃ§Ãµes > Configurar Certificado > WinCrypt > coloca a senha do cliente (do certificado) > verifica se apareceu a data certa e \"ok\".",
+      "tags": [
+        "ðŸ› ï¸ðŸ’»INSTALAÃ‡ÃƒO",
+        "certificado",
+        "digital"
+      ],
+      "metadata": {
+        "canal_id": "1414602900746928178",
+        "canal_nome": "certificado-digital",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:20:48.8572474-03:00"
+      }
+    },
+    {
+      "id": 49,
+      "palavras_chave": [
+        "instalaÃ§Ã£o",
+        "sistema"
+      ],
+      "problema": "InstalaÃ§Ã£o De Sistema",
+      "solucao": "ARQUIVO DA DÃ‰BORA COM O PASSO A PASSO DELA PARA INSTALAR\n\n1- Pedir conexÃ£o AnyDesk para o cliente ( tanto da maquina que vai instalar quanto do PC SERVIDOR) \n\n**ANTES DE INICIAR, FAZER BACKUP DE TODOS OS SISTEMAS**\n\n2- Copiar a pasta \" INOVAR SISTEMAS \" do PC servidor.\n\n3- Colar a pasta em C:\\Program Files e fazer a liberaÃ§Ã£o da pasta INOVAR SISTEMAS.\n\n4- Para fazer a liberaÃ§Ã£o -> Clicar com o botÃ£o direito do mouse e ir em \" PROPRIEDADES \".\n\n5- Desabilitar Somente leitura â†’ Aplicar â†’ OK â†’ Continuar.\n\n6- Ainda em propriedades ir em Compartilhamento â†’ Compartilhamento avanÃ§ado â†’ Compartilhar pasta.\n\n7- Ainda nessa tela de compartilhamento da pasta â†’ ir em PermissÃµes â†’ Controle total â†’ Aplicar â†’ OK.\n\n8- Ainda em propriedades da pasta ir em â†’ SeguranÃ§a â†’ Clicar no primeiro \"editar\" â†’ \" adicionar \" â†’ Criar o usuÃ¡rio Todos â†’ Clicar em ok â†’ Em permissÃµes para \"Todos\" clicar em \" Controle total \" â†’ aplicar e ok.\n\n9- Abrir o Painel de Controle â†’ Contas de UsuÃ¡rios â†’ Alterar configuraÃ§Ãµes de contas de usuÃ¡rios â†’ puxar o pino totalmente atÃ© embaixo.\n\n10- No Painel de Controle ir em Central de Rede e Compartilhamento â†’ Alterar as configuraÃ§Ãµes de compartilhamento avanÃ§adas.\n\n11- Convidado ou PÃºblico (Perfil atual) : ativar tudo.\n\n12- Todas as redes â†’ Compartilhamento protegido por senha: desativar.\n\n13- Ir em Windows Defender Firewall â†’ Ativar ou Desativar o Windows Defender Firewall (na esquerda) â†’ Desativar o firewall.\n\n14- Configurar o INI com o aplicativo configurar sistema â†’\nâ†’Copiar o caminho da pasta (Venda ou Comercial) e colar no Meu Configurar sistema â†’ clicar em Ler INI e alterar o Meu Host com o mesmo nome do computador do servidor que irei pegar conexÃ£o â†’ colocar o nÃºmero da mÃ¡quina (pode ser numero aleatÃ³rio grande â†’ apÃ³s isso Ã© sÃ³ clicar em Chave e gravar ini.\n\n15- Acessar o sistema â†’ configurar o certificado digital e verificar se as configuraÃ§Ãµes serÃ£o aplicadas â†’ como impressÃµes por exemplo.\n\n16- ApÃ³s feito isso â†’ ir na pasta Backup â†’ clicar com o botÃ£o direito do mouse em Propriedades e criar a permissÃ£o para o usuÃ¡rio Todos.",
+      "tags": [
+        "ðŸ› ï¸ðŸ’»INSTALAÃ‡ÃƒO",
+        "instalaÃ§Ã£o",
+        "sistema"
+      ],
+      "metadata": {
+        "canal_id": "1422626825758052535",
+        "canal_nome": "instalaÃ§Ã£o-de-sistema",
+        "total_mensagens": 4,
+        "data_export": "2026-02-03T10:20:45.7400301-03:00"
+      }
+    },
+    {
+      "id": 50,
+      "palavras_chave": [
+        "como",
+        "cancelar",
+        "nfce"
+      ],
+      "problema": "Como Cancelar Nfce",
+      "solucao": "**IMPORTANTE:** SE EXCEDER OS 30 MINUTOS PARA CANCELAMENTO TEM QUE FAZER NOTA DE DEVOLUÃ‡ÃƒO,\n\n**NESSE CASO QUE EXCEDEU:**\n1- MANDAR CLIENTE SOLICITAR OS DADOS FISCAIS CORRETOS PARA EMITIR A NFE DE DEVOLUÃ‡ÃƒO COM A CONTABILIDADE.\n\n**CASO NÃƒO TENHA EXCEDIDO: ** IR EM VENDAS > NFCE > OPERAÃ‡Ã•ES > LOCALIZAR > LOCALIZA A NOTA > CANCELAR.\n**(SE NÃƒO TIVER EXCEDIDO OS 30min VAI CANCELAR.)**",
+      "tags": [
+        "ðŸ§¾NFCE",
+        "como",
+        "cancelar",
+        "nfce"
+      ],
+      "metadata": {
+        "canal_id": "1423271823432351794",
+        "canal_nome": "como-cancelar-nfce",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:21:51.1855721-03:00"
+      }
+    },
+    {
+      "id": 51,
+      "palavras_chave": [
+        "fazer",
+        "devoluÃ§Ã£o",
+        "nfce"
+      ],
+      "problema": "Fazer DevoluÃ§Ã£o De Nfce",
+      "solucao": "SE EXEDER O PRAZO MÃXIMO DE 30 MIN, TEM QUE :\n\n1- pedir pra contabilidade as informaÃ§Ãµes necessÃ¡rias dos produtos e da nota para gerar essa nota de devoluÃ§Ã£o.\n2- Fazer nf de devolucao com produtos que foi colocado na nfce\n3- na hora da referÃªncia colocar o numero da nfce e a serie",
+      "tags": [
+        "ðŸ§¾NFCE",
+        "fazer",
+        "devoluÃ§Ã£o",
+        "nfce"
+      ],
+      "metadata": {
+        "canal_id": "1425159949008371822",
+        "canal_nome": "fazer-devoluÃ§Ã£o-de-nfce",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:21:52.5432321-03:00"
+      }
+    },
+    {
+      "id": 52,
+      "palavras_chave": [
+        "nfce",
+        "cancelada",
+        "nao",
+        "aparece",
+        "como",
+        "cancelada"
+      ],
+      "problema": "Nfce Cancelada Nao Aparece Como Cancelada",
+      "solucao": "1- vai no banco e localiza a nota\n2- verifica em NFCE_SITUACAO se estÃ¡ = 5 \"5 Ã© cancelada\"\n3- para verificar a nota, pega a chave de acesso da nota\n4- vai no site \" https://sat.sef.sc.gov.br/tax.NET/Sat.Dfe.NFCe.Web/Consultas/ConsultaPublicaNFCe.aspx \"\n5- pesquisa a chave e ve se aparece como cancelada\n6- se aparecer como cancelada, vai na tabela NFCE, acha a coluna NFCE_SITUACAO e altera para \" 5 \"\n7- Depois vai em itensnfce e verifica se os produtos com o COD_NFCE iguais ( que sÃ£o os produtos da nota) estÃ£o tambem como NFCE_SITUACAO = 5. (se nao tiver, alterar.)\n\n**PARA IDENTIFICAR OS PRODUTOS DA NOTA\no cÃ³digo que tiver na coluna NFC_CODIGO na tabela NFCE, tem que ser igual ao codigo na tabela ITENSNFCE na coluna COD_NFCE.**",
+      "tags": [
+        "ðŸ§¾NFCE",
+        "nfce",
+        "cancelada",
+        "nao"
+      ],
+      "metadata": {
+        "canal_id": "1434892076046221312",
+        "canal_nome": "nfce-cancelada-nao-aparece-como-cancelada",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:21:49.2402147-03:00"
+      }
+    },
+    {
+      "id": 53,
+      "palavras_chave": [
+        "cancelar",
+        "nota",
+        "fiscal",
+        "autorizada"
+      ],
+      "problema": "Cancelar Nota Fiscal Autorizada",
+      "solucao": "NO SISTEMA EXISTE 2 POSSIBILIDADES DE CANCELAMENTO DE NOTAS: **CANCELAR DENTRO DE 24HRS** ou **DEPOIS DE 24HRS **\n\n**SE FOR CANCELAR DEPOIS DE 24hrs:**\n\n00- Pode ir em FISCAL > NFE.\n\n1- localizar a nota que quer cancelar > clicar em \" OPERAÃ‡Ã•ES \" > clicar em \" CANCELAR \" > clicar em \" DEPOIS DE 24HRS \".\n\n2- ApÃ³s fazer isso vai aparecer uma mensagem informando que vai ser gerado uma **NFE DE AJUSTE** para efetuar cancelamento. > clicar em \"**SIM**\".\n\n3- ApÃ³s clicar em \"**SIM**\" vai ter que colocar a justificativa do cancelamento.\n\n4- ApÃ³s colocar a justificativa, o sistema vai pedir o \"**CFOP**\" correto para emissÃ£o dessa **NFE DE AJUSTE**. (essa informaÃ§Ã£o tem que solicitar para a sua contabilidade).\n\n5- ApÃ³s colocar o **CFOP** correto clicar em \"**CONFIRMAR**.\n\n6- ApÃ³s clicar em **CONFIRMAR** o sistema vai gerar essa **NFE DE AJUSTE** e Ã© sÃ³ clicar em \"**TRANSMITIR**\".\n\nE pronto, nota fiscal cancelada.",
+      "tags": [
+        "ðŸ§¾NFE",
+        "cancelar",
+        "nota",
+        "fiscal"
+      ],
+      "metadata": {
+        "canal_id": "1417568235963941014",
+        "canal_nome": "cancelar-nota-fiscal-autorizada",
+        "total_mensagens": 7,
+        "data_export": "2026-02-03T10:22:45.5279237-03:00"
+      }
+    },
+    {
+      "id": 54,
+      "palavras_chave": [
+        "como",
+        "fazer",
+        "nota",
+        "remessa"
+      ],
+      "problema": "Como Fazer Nota Remessa",
+      "solucao": "como fazer nota de remessa\n\n1Â°- fiscal > nfe > incluir > CFOP indicado > NATUREZA DE OPERAÃ‡ÃƒO REMESSA > TIPO SAIDA > CONSUMIDOR FINAL (VER CONTABILIDADE) > PRESENÃ‡A DO COMPRADOR (VER CONTABILIDADE).\n\nDESTINARIO QUEM VAI RECEBER\n\nTRANSPORTADOR (SE TIVER UMA ESPECÃFICA VAI TER QUE CADASTRAR) > EM AUXILIARES> TRANSPORTADORA\nSE CADASTRAR SAI DA NOTA E VOLTA.\nSE NAO TIVER, BOTA SEM OCORRENCIA DE TRANSP EM \"MODALIDADE FRETE\"\n\n2Â°- DEPOIS DISSO CLICA EM \" SALVAR \"\n\n3Â° VAI NA ABA PRODUTOS E COLOCA O PRODUTO, SE NAO TIVER CADASTRADO TEM QUE PEGAR OS DADOS COM A CONTABILIDADE PQ O PRODUTO TEM QUE ESTAR CADASTRADO.\nSE ALTERAR ALGO NO PRODUTO VAI EM \"UNITARIO FINAL\" APERTA \" SHIFT + ENTER\" PRA SALVAR ALTERAÃ‡Ã•ES.\n\n4Â°- DADOS ADICIONAIS, ONDE COLOCA PAGAMENTO, PROVAVELMENTE NESSA CASO NAO VAI TER, AI BOTA \"SEM PAGAMENTO\"\n\n**5Â°- SE FICAR EM DUVIDA PODE CLICAR EM \"EMPRIMIR\" QUE AI GERA ALGO NAO FISCAL PRA CONFERIR SE ESTA TUDO OK, ANTES DE TRANSMITIR.**\n\n6Â°- SE TUDO OK, CLICA EM TRANSMITIR (AI ELA FOI PRO SEFAZ, TUDO GERADO.)\n\nSE ERRAR TEM 24HRS PRA FAZER CANCELAMENTO.\nSE CASO PASSAR DO PRAZO TEM QUE VER COM CONTABILIDADE.",
+      "tags": [
+        "ðŸ§¾NFE",
+        "como",
+        "fazer",
+        "nota"
+      ],
+      "metadata": {
+        "canal_id": "1415063275300851894",
+        "canal_nome": "como-fazer-nota-remessa",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:22:43.8147105-03:00"
+      }
+    },
+    {
+      "id": 55,
+      "palavras_chave": [
+        "importar",
+        "comanda",
+        "gerar",
+        "nfe"
+      ],
+      "problema": "Importar Comanda P Gerar Nfe",
+      "solucao": "FISCAL NFE >  CRIA A NOTA COM OS DADOS DO CLIENTE, CFOP, NATUREZA DE OPERAÃ‡ÃƒO ETC...\n\nDEPOIS DE TER FEITO ESSE PROCESSO INCIAL >\n\nVAI NO CANTO INFERIOR DIREITO E CLICA EM \" ATALHOS \" > CLICA EM \" IMPORTAR \"\n\nSELECIONA EM TIPO  \" DAVS NAO EMITIDOS \" e  \" PEDIDOS RESTAURANTE \"\n\nSeleciona a comanda e clica la no canto superior direito em \" IMPORTAR \"\n\ne depois clica em \" CONFIRMAR \"",
+      "tags": [
+        "ðŸ§¾NFE",
+        "importar",
+        "comanda",
+        "gerar"
+      ],
+      "metadata": {
+        "canal_id": "1436083367035535430",
+        "canal_nome": "importar-comanda-p-gerar-nfe",
+        "total_mensagens": 4,
+        "data_export": "2026-02-03T10:22:51.6896814-03:00"
+      }
+    },
+    {
+      "id": 56,
+      "palavras_chave": [
+        "mudar",
+        "logo"
+      ],
+      "problema": "Mudar Logo Nf",
+      "solucao": "Quando precisar mudar logo de qualquer NOTA FISCAL\n\nSolicitar para o cliente localizar o arquivo da nova logo\nIr na pasta do COMERCIAL > achar o arquivo \"logo\" e mudar para a nova logo, sÃ³ renomear o arquivo para o nome igual que quer substituir",
+      "tags": [
+        "ðŸ§¾NFE",
+        "mudar",
+        "logo"
+      ],
+      "metadata": {
+        "canal_id": "1420033629953851402",
+        "canal_nome": "mudar-logo-nf",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:22:49.8614847-03:00"
+      }
+    },
+    {
+      "id": 57,
+      "palavras_chave": [
+        "nota",
+        "estorno"
+      ],
+      "problema": "Nota De Estorno",
+      "solucao": "estorno da para fazer pelo cancelamento de 24hrs tambem",
+      "tags": [
+        "ðŸ§¾NFE",
+        "nota",
+        "estorno"
+      ],
+      "metadata": {
+        "canal_id": "1415300020437254255",
+        "canal_nome": "nota-de-estorno",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:22:48.4170336-03:00"
+      }
+    },
+    {
+      "id": 58,
+      "palavras_chave": [
+        "nota",
+        "fiscal",
+        "devoluÃ§Ã£o"
+      ],
+      "problema": "Nota Fiscal DevoluÃ§Ã£o",
+      "solucao": "NF DEVOLUÃ‡ÃƒO\n\n1- questionar se ja pegou os dados com a contabilidade\n(CFOP, CSOSN, NATUREZA DE OPERAÃ‡ÃƒO)\n\n2- Fiscal > Nfe >\n(Questionar se Ã© p cliente ou fornecedor, \n(se cliente tipo Entrada, Fornecedor tipo saida)'\nShift + enter pra salvar",
+      "tags": [
+        "ðŸ§¾NFE",
+        "nota",
+        "fiscal",
+        "devoluÃ§Ã£o"
+      ],
+      "metadata": {
+        "canal_id": "1413160443395969145",
+        "canal_nome": "nota-fiscal-devoluÃ§Ã£o",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:22:47.0374297-03:00"
+      }
+    },
+    {
+      "id": 59,
+      "palavras_chave": [
+        "nfse",
+        "existente"
+      ],
+      "problema": "Nfse Ja Existente",
+      "solucao": "1- pega os dados da nfce e abre o Heidi\n2- no Heidi pesquisa por \"nfse\" e localiza a nota, provavelmente vai ser a ultima e vai ser zerada\n3- vai no site do governo da cidade da empresa e entra lÃ¡ para ver qual a ultima nfce criada\n4- chegando no site, Ã© vÃ¡lido verificar se jÃ¡ nÃ£o foi autorizada essa nfse, normalmente sim\n5- no Heidi, tem que alterar as colunas\nNFS_NUMERO, NFS_SITUACAORPS, NFS_SITUACAONFSE, NFS_DATAEMI, NFS_PROTOCOLO\n\n6- atualiza o sistema e a nota vai estar autorizada, geralmente quando inclui a nota no banco, nÃ£o vai conseguir fazer a impressÃ£o no sistema dessa nfse, a pessoa vai ter que imprimir direto pelo site da prefeitura.",
+      "tags": [
+        "ðŸ§¾NFSE",
+        "nfse",
+        "existente"
+      ],
+      "metadata": {
+        "canal_id": "1438860305882021929",
+        "canal_nome": "nfse-ja-existente",
+        "total_mensagens": 2,
+        "data_export": "2026-02-03T10:21:54.1854735-03:00"
+      }
+    },
+    {
+      "id": 60,
+      "palavras_chave": [
+        "problema",
+        "nota",
+        "servico"
+      ],
+      "problema": "Problema Nota De Servico",
+      "solucao": "quando der problema com nota de serviÃ§o, \n\nir no banco (no pc do cliente) > \"nfse\" > localiza a nota e alterar numero de lote",
+      "tags": [
+        "ðŸ§¾NFSE",
+        "problema",
+        "nota",
+        "servico"
+      ],
+      "metadata": {
+        "canal_id": "1414983744783126558",
+        "canal_nome": "problema-nota-de-servico",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T10:22:41.6262046-03:00"
+      }
+    },
+    {
+      "id": 61,
+      "palavras_chave": [
+        "erro",
+        "conexao",
+        "banco",
+        "sql"
+      ],
+      "problema": "Erro de conexão com banco",
+      "solucao": "Reinicie o serviço SQL Server",
+      "tags": [
+        "database",
+        "erro"
+      ],
+      "metadata": {
+        "canal_id": null,
+        "canal_nome": "adicionado-manualmente",
+        "total_mensagens": 1,
+        "data_export": "2026-02-03T17:55:40.157Z"
+      }
+    }
+  ],
+  "metadata": {
+    "total_solucoes": 60,
+    "data_geracao": "2026-02-03T13:37:08.829Z",
+    "fonte": "Discord Export"
+  }
+}

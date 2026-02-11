@@ -1,9 +1,12 @@
-// Importar bibliotecas necessárias
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { QdrantClient } = require('@qdrant/js-client-rest');
+const { pipeline } = require('@xenova/transformers');
 const fs = require('fs');
 require('dotenv').config();
 
-// Criar o cliente do bot com as permissões necessárias
+// ==========================================
+// 1. CONFIGURAÇÕES E CLIENTES
+// ==========================================
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -12,298 +15,207 @@ const client = new Client({
   ],
 });
 
-// Carregar banco de dados de soluções
+const qdrant = new QdrantClient({ url: 'http://localhost:6333' });
+const COLLECTION_NAME = 'solucoes_inovar';
+const JSON_FILE = 'solucoes.json';
+let extractor;
+
+// ==========================================
+// 2. MOTOR DE IA (PREPARAÇÃO)
+// ==========================================
+async function prepararIA() {
+  registrarLog('INFO', '🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...');
+  extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+  registrarLog('INFO', '✅ IA Pronta! Sistema operando com Busca Vetorial.');
+}
+
+// ==========================================
+// 3. FUNÇÕES DE APOIO E LOGS
+// ==========================================
 let bancoDados = {};
 try {
-  const dados = fs.readFileSync('solucoes_importadas.json', 'utf8');
+  // CORREÇÃO: Forçando leitura em UTF-8 para evitar caracteres bugados (ex: conexo)
+  const dados = fs.readFileSync(JSON_FILE, 'utf8');
   bancoDados = JSON.parse(dados);
   console.log(`✅ Banco de dados carregado: ${bancoDados.solucoes.length} soluções`);
 } catch (erro) {
-  console.error('❌ Erro ao carregar solucoes_importadas.json:', erro.message);
+  console.error(`❌ Erro ao carregar ${JSON_FILE}:`, erro.message);
   process.exit(1);
 }
 
-// Função para registrar logs em arquivo
 function registrarLog(tipo, mensagem) {
   const timestamp = new Date().toLocaleString('pt-BR');
   const linha = `[${timestamp}] ${tipo}: ${mensagem}\n`;
-
   fs.appendFileSync('log.txt', linha);
   console.log(linha.trim());
 }
 
-// Função para buscar solução por palavras-chave (versão melhorada)
-function buscarSolucao(pergunta) {
-  const perguntaLower = pergunta.toLowerCase();
-  let melhorMatch = null;
-  let maiorPontuacao = 0;
+// ==========================================
+// 4. FUNÇÕES DE IA (BUSCA E SALVAMENTO)
+// ==========================================
 
-  // Percorrer todas as soluções e dar pontuação
-  for (const solucao of bancoDados.solucoes) {
-    let pontuacao = 0;
+async function buscarSolucaoIA(pergunta) {
+  // AÇÃO: Aplicamos o peso triplicado na BUSCA para dar match com o banco populado
+  const buscaComPeso = `PROBLEMA: ${pergunta}. PROBLEMA: ${pergunta}. PROBLEMA: ${pergunta}.`;
+  
+  const output = await extractor(buscaComPeso, { pooling: 'mean', normalize: true });
+  const embedding = Array.from(output.data);
 
-    // Verificar palavras-chave (peso maior)
-    for (const palavra of solucao.palavras_chave) {
-      if (perguntaLower.includes(palavra.toLowerCase())) {
-        pontuacao += 3; // Peso 3 para palavras-chave
-      }
-    }
-
-    // Verificar tags (peso menor)
-    for (const tag of solucao.tags) {
-      if (perguntaLower.includes(tag.toLowerCase())) {
-        pontuacao += 1; // Peso 1 para tags
-      }
-    }
-
-    // Verificar no título do problema
-    const problemaWords = solucao.problema.toLowerCase().split(' ');
-    for (const word of problemaWords) {
-      if (word.length > 3 && perguntaLower.includes(word)) {
-        pontuacao += 2; // Peso 2 para palavras do título
-      }
-    }
-
-    // Atualizar melhor match se encontrou pontuação maior
-    if (pontuacao > maiorPontuacao) {
-      maiorPontuacao = pontuacao;
-      melhorMatch = solucao;
-    }
-  }
-
-  // Retornar apenas se tiver pontuação mínima de 2
-  return maiorPontuacao >= 2 ? melhorMatch : null;
+  return await qdrant.search(COLLECTION_NAME, {
+    vector: embedding,
+    limit: 3,
+    with_payload: true
+  });
 }
 
-// Função para buscar múltiplas soluções relacionadas
-function buscarSolucoesRelacionadas(pergunta, limite = 3) {
-  const perguntaLower = pergunta.toLowerCase();
-  const resultados = [];
-
-  for (const solucao of bancoDados.solucoes) {
-    let pontuacao = 0;
-
-    // Mesma lógica de pontuação da função anterior
-    for (const palavra of solucao.palavras_chave) {
-      if (perguntaLower.includes(palavra.toLowerCase())) {
-        pontuacao += 3;
-      }
-    }
-
-    for (const tag of solucao.tags) {
-      if (perguntaLower.includes(tag.toLowerCase())) {
-        pontuacao += 1;
-      }
-    }
-
-    if (pontuacao > 0) {
-      resultados.push({ solucao, pontuacao });
-    }
-  }
-
-  // Ordenar por pontuação e retornar top N
-  return resultados
-    .sort((a, b) => b.pontuacao - a.pontuacao)
-    .slice(0, limite)
-    .map(r => r.solucao);
-}
-
-// Função para salvar nova solução no JSON
-function salvarNovaSolucao(problema, solucao, palavrasChave, tags) {
+async function salvarNovaSolucao(problema, solucao, palavrasChave, tags, canalId, canalNome) {
   const novoId = bancoDados.solucoes.length > 0
     ? Math.max(...bancoDados.solucoes.map(s => s.id)) + 1
     : 1;
 
-  const novaSolucao = {
-    id: novoId,
-    palavras_chave: palavrasChave,
-    problema: problema,
-    solucao: solucao,
-    tags: tags,
-    metadata: {
-      canal_id: null,
-      canal_nome: 'adicionado-manualmente',
-      total_mensagens: 1,
-      data_export: new Date().toISOString()
-    }
-  };
-
-  bancoDados.solucoes.push(novaSolucao);
-
   try {
-    fs.writeFileSync('solucoes_importadas.json', JSON.stringify(bancoDados, null, 2), 'utf8');
-    return true;
+    // Técnica de Peso de Campo no salvamento
+    const textoParaVetor = `PROBLEMA: ${problema}. PROBLEMA: ${problema}. PROBLEMA: ${problema}. CONTEÚDO: ${solucao}`;
+    const output = await extractor(textoParaVetor, { pooling: 'mean', normalize: true });
+    const embedding = Array.from(output.data);
+
+    await qdrant.upsert(COLLECTION_NAME, {
+      points: [{
+        id: novoId,
+        vector: embedding,
+        payload: { 
+          id: novoId, 
+          problema, 
+          solucao, 
+          tags,
+          canal_id: canalId,
+          canal_nome: canalNome
+        }
+      }]
+    });
+
+    const novaSolucao = {
+      id: novoId,
+      palavras_chave: palavrasChave,
+      problema: problema,
+      solucao: solucao,
+      tags: tags,
+      metadata: {
+        canal_id: canalId,
+        canal_nome: canalNome,
+        total_mensagens: 1,
+        data_export: new Date().toISOString()
+      }
+    };
+    
+    bancoDados.solucoes.push(novaSolucao);
+    fs.writeFileSync(JSON_FILE, JSON.stringify(bancoDados, null, 2), 'utf8');
+    
+    return novoId;
   } catch (erro) {
-    registrarLog('ERRO', `Erro ao salvar: ${erro.message}`);
-    return false;
+    registrarLog('ERRO', `Falha ao salvar: ${erro.message}`);
+    return null;
   }
 }
 
-// Quando o bot estiver pronto e online
-client.once('ready', () => {
+// ==========================================
+// 5. EVENTOS DO DISCORD
+// ==========================================
+
+client.once('ready', async () => {
+  await prepararIA();
   registrarLog('INFO', `Bot conectado como ${client.user.tag}`);
-  registrarLog('INFO', `Monitorando canal ID: ${process.env.CANAL_SUPORTE_ID}`);
 });
 
-// Quando uma mensagem for enviada
 client.on('messageCreate', async (message) => {
-  // Ignorar mensagens do próprio bot
-  if (message.author.bot) return;
+  if (message.author.bot || message.channel.id !== process.env.CANAL_SUPORTE_ID) return;
 
-  // Processar apenas mensagens do canal de suporte configurado
-  if (message.channel.id !== process.env.CANAL_SUPORTE_ID) return;
-
-  registrarLog('INFO', `Pergunta de ${message.author.tag}: ${message.content}`);
-
-  // Comando de ajuda
-  if (message.content === '!ajuda') {
-    const ajuda = `
-**🤖 Comandos do Bot de Suporte Inovar**
-
-**Para fazer perguntas:**
-Apenas escreva sua dúvida normalmente. Exemplo:
-\`como resetar senha?\`
-
-**Para salvar uma nova solução:**
-\`!salvar | título do problema | solução detalhada | palavra1,palavra2,palavra3 | tag1,tag2\`
-
-**Exemplo de salvamento:**
-\`!salvar | Erro de conexão com banco | Reinicie o serviço SQL Server | erro,conexao,banco,sql | database,erro\`
-
-**Para ver esta ajuda:**
-\`!ajuda\`
-
-**Para listar soluções:**
-\`!listar\`
-
-**Para buscar por tag:**
-\`!tag nome-da-tag\`
-    `;
-    await message.reply(ajuda);
-    return;
-  }
-
-  // Comando para listar todas as soluções
-  if (message.content === '!listar') {
-    if (bancoDados.solucoes.length === 0) {
-      await message.reply('Ainda não há soluções cadastradas.');
-      return;
-    }
-
-    // Agrupar por categoria
-    const porCategoria = {};
-    bancoDados.solucoes.forEach(sol => {
-      const categoria = sol.tags[0] || 'Sem categoria';
-      if (!porCategoria[categoria]) {
-        porCategoria[categoria] = [];
-      }
-      porCategoria[categoria].push(sol);
-    });
-
-    let lista = '**📚 Soluções Cadastradas:**\n\n';
-
-    for (const [categoria, solucoes] of Object.entries(porCategoria)) {
-      lista += `**${categoria.toUpperCase()}:**\n`;
-      solucoes.slice(0, 5).forEach(sol => {
-        lista += `• **ID ${sol.id}:** ${sol.problema}\n`;
-      });
-      if (solucoes.length > 5) {
-        lista += `  _(+ ${solucoes.length - 5} outras)_\n`;
-      }
-      lista += '\n';
-    }
-
-    lista += `\n**Total:** ${bancoDados.solucoes.length} soluções`;
-
-    await message.reply(lista);
-    return;
-  }
-
-  // Comando para buscar por tag
-  if (message.content.startsWith('!tag ')) {
-    const tagBuscada = message.content.replace('!tag ', '').toLowerCase().trim();
-
-    const encontradas = bancoDados.solucoes.filter(sol =>
-      sol.tags.some(tag => tag.toLowerCase().includes(tagBuscada))
-    );
-
-    if (encontradas.length === 0) {
-      await message.reply(`Nenhuma solução encontrada com a tag "${tagBuscada}"`);
-      return;
-    }
-
-    let lista = `**🏷️ Soluções com a tag "${tagBuscada}":**\n\n`;
-    encontradas.slice(0, 10).forEach(sol => {
-      lista += `**ID ${sol.id}:** ${sol.problema}\n`;
-      lista += `*Tags: ${sol.tags.join(', ')}*\n\n`;
-    });
-
-    if (encontradas.length > 10) {
-      lista += `_(Mostrando 10 de ${encontradas.length} resultados)_`;
-    }
-
-    await message.reply(lista);
-    return;
-  }
-
-  // Comando para salvar nova solução
-  if (message.content.startsWith('!salvar')) {
+  // --- 1. FILTRO DE COMANDOS (!ajuda, !salvar, !listar) ---
+  if (message.content.startsWith('!')) {
     const partes = message.content.split('|').map(p => p.trim());
+    const comando = partes[0].toLowerCase();
 
-    if (partes.length !== 5) {
-      await message.reply('❌ Formato incorreto. Use:\n`!salvar | problema | solução | palavra1,palavra2 | tag1,tag2`');
+    if (comando === '!ajuda') {
+      const ajuda = `**🤖 Suporte IA Inovar (v0.3.3)**\n\n` +
+        `**Perguntar:** Digite sua dúvida normalmente.\n` +
+        `**Salvar:** \`!salvar | título | solução | palavras | tags\`\n` +
+        `**Listar:** \`!listar\``;
+      await message.reply(ajuda);
+      return; // Trava para não responder 2x
+    }
+
+    if (comando === '!listar') {
+      await message.reply(`**📚 Base de Conhecimento:** ${bancoDados.solucoes.length} soluções indexadas.`);
       return;
     }
 
-    const [, problema, solucao, palavrasTexto, tagsTexto] = partes;
-    const palavras = palavrasTexto.split(',').map(p => p.trim());
-    const tags = tagsTexto.split(',').map(t => t.trim());
-
-    const sucesso = salvarNovaSolucao(problema, solucao, palavras, tags);
-
-    if (sucesso) {
-      await message.reply(`✅ Solução salva com sucesso! Total de soluções: ${bancoDados.solucoes.length}`);
-      registrarLog('INFO', `Nova solução salva: "${problema}"`);
-    } else {
-      await message.reply('❌ Erro ao salvar a solução. Verifique os logs.');
+    if (comando === '!salvar') {
+      if (partes.length !== 5) {
+        await message.reply('❌ Use: `!salvar | título | solução | palavras | tags`');
+        return;
+      }
+      
+      const [, problema, solucao, palavrasTexto, tagsTexto] = partes;
+      const idSalvo = await salvarNovaSolucao(
+        problema, 
+        solucao, 
+        palavrasTexto.split(','), 
+        tagsTexto.split(','),
+        message.channel.id,
+        message.channel.name
+      );
+      await message.reply(idSalvo ? `✅ Solução #${idSalvo} salva e canal <#${message.channel.id}> vinculado!` : '❌ Erro ao salvar.');
+      return;
     }
-
-    return;
+    
+    return; 
   }
 
-  // Buscar solução no banco de dados
-  const solucaoEncontrada = buscarSolucao(message.content);
+  // --- 2. BUSCA SEMÂNTICA ---
+  try {
+    const resultados = await buscarSolucaoIA(message.content);
 
-  if (solucaoEncontrada) {
-    // Encontrou uma solução!
-    registrarLog('INFO', `Solução encontrada: ID ${solucaoEncontrada.id}`);
-
-    // Limpar @everyone do texto
-    const solucaoLimpa = solucaoEncontrada.solucao.replace(/@everyone/g, '');
-
-    const resposta = `**${solucaoEncontrada.problema}**\n\n${solucaoLimpa}\n\n*Tags: ${solucaoEncontrada.tags.join(', ')}*\n*ID: ${solucaoEncontrada.id}*`;
-
-    await message.reply(resposta);
-
-    // Buscar soluções relacionadas
-    const relacionadas = buscarSolucoesRelacionadas(message.content, 3)
-      .filter(s => s.id !== solucaoEncontrada.id);
-
-    if (relacionadas.length > 0) {
-      let sugestoes = '\n\n**📎 Soluções relacionadas:**\n';
-      relacionadas.forEach(sol => {
-        sugestoes += `• ${sol.problema} (ID: ${sol.id})\n`;
-      });
-      await message.channel.send(sugestoes);
+    // O PAINEL DE ANÁLISE COM O STATUS DE VOLTA:
+    if (resultados.length > 0) {
+        console.log(`\n[ANALYSIS] 🔍 Pergunta: "${message.content}"`);
+        console.log(`[ANALYSIS] 🎯 Melhor Match: "${resultados[0].payload.problema}"`);
+        console.log(`[ANALYSIS] 📊 Score: ${resultados[0].score.toFixed(4)} (Threshold: 0.50)`);
+        console.log(`[ANALYSIS] 📈 Status: ${resultados[0].score > 0.50 ? '✅ APROVADO' : '❌ REJEITADO'}\n`);
     }
 
-  } else {
-    // Não encontrou solução
-    registrarLog('INFO', 'Nenhuma solução encontrada');
+    if (resultados.length > 0 && resultados[0].score > 0.50) {
+      const principal = resultados[0].payload;
+      const confianca = (resultados[0].score * 100).toFixed(1);
+      const corEmbed = resultados[0].score > 0.75 ? 0x2ecc71 : 0xf1c40f; 
 
-    await message.reply('❌ Não encontrei uma solução registrada para essa dúvida.\n\n**Você pode:**\n• Tentar reformular a pergunta\n• Usar `!listar` para ver todas as soluções\n• Consultar um membro da equipe de suporte');
+      const embed = new EmbedBuilder()
+        .setColor(corEmbed)
+        .setTitle(`✅ Solução Encontrada: ${principal.problema}`)
+        .setDescription(principal.solucao.replace(/@everyone/g, ''))
+        .addFields(
+          { name: 'Confiança da IA', value: `**${confianca}%**`, inline: true },
+          { name: 'ID da Base', value: `#${principal.id}`, inline: true }
+        )
+        .setFooter({ text: 'Inovar Sistemas • Suporte IA Semântico' });
+
+      await message.reply({ embeds: [embed] });
+
+      // Sugestões Relacionadas com Menção de Canal Corrigida
+      const relacionadas = resultados.slice(1).filter(r => r.score > 0.40);
+      if (relacionadas.length > 0) {
+        let textoRel = `**📎 Talvez isso também ajude:**\n`;
+        relacionadas.forEach(r => {
+          const local = r.payload.canal_id ? `<#${r.payload.canal_id}>` : `canal ${r.payload.canal_nome || 'Geral'}`;
+          textoRel += `• **${r.payload.problema}** no ${local} (Confiança: ${(r.score * 100).toFixed(0)}%)\n`;
+        });
+        await message.channel.send(textoRel);
+      }
+    } else {
+      await message.reply('❌ Nenhuma solução encontrada com confiança alta. Tente detalhar melhor a pergunta.');
+    }
+  } catch (error) {
+    registrarLog('ERRO', `Falha na busca vetorial: ${error.message}`);
   }
 });
 
-// Fazer login com o token
 client.login(process.env.DISCORD_TOKEN);

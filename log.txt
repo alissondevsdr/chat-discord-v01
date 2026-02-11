@@ -11,3 +11,41 @@
 [03/02/2026, 14:55:40] INFO: Pergunta de alissoninovarsistemassuporte: !salvar | Erro de conexão com banco | Reinicie o serviço SQL Server | erro,conexao,banco,sql | database,erro
 [03/02/2026, 14:55:40] INFO: Nova solução salva: "Erro de conexão com banco"
 [03/02/2026, 14:55:55] INFO: Pergunta de alissoninovarsistemassuporte: !tag nfe
+[11/02/2026, 00:15:13] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 00:15:13] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 00:15:13] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 00:15:29] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 00:15:39] INFO: Pergunta de guilhermerossa25: nfe
+[11/02/2026, 00:15:46] INFO: Pergunta de guilhermerossa25: rejeição
+[11/02/2026, 00:16:03] INFO: Pergunta de guilhermerossa25: rejeição de nota
+[11/02/2026, 01:44:24] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 01:45:11] INFO: Pergunta de guilhermerossa25: nfse
+[11/02/2026, 01:46:03] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 01:46:03] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 01:46:03] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 01:46:26] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 01:46:26] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 01:46:53] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 01:46:53] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 01:54:30] INFO: Pergunta de guilhermerossa25: oi
+[11/02/2026, 02:23:42] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 02:23:42] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 02:23:42] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 02:25:42] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 02:25:42] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 02:25:42] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 02:30:04] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 02:30:04] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 02:30:04] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 02:32:23] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 02:32:23] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 02:32:23] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 02:36:03] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 02:36:03] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 02:36:03] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 02:41:39] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 02:41:39] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 02:41:39] INFO: Bot conectado como Teste Bot Inovar#6951
+[11/02/2026, 08:19:40] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[11/02/2026, 08:19:40] INFO: ✅ IA Pronta! Sistema operando com Busca Vetorial.
+[11/02/2026, 08:19:40] INFO: Bot conectado como Teste Bot Inovar#6951
