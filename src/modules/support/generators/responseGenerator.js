@@ -7,7 +7,7 @@
 
 const fetch = require('node-fetch');
 
-class welcomeMessage {
+class responseGenerator {
   constructor() {
     this.urlOllama = process.env.URL_OLLAMA || 'http://127.0.0.1:11435';
     this.modelo = process.env.MODELO_OLLAMA || 'qwen1.5b-safe:latest';
@@ -34,6 +34,14 @@ class welcomeMessage {
         'Que legal! 😊 Mas meu expertise é em suporte técnico. Tem alguma dúvida sobre o sistema?',
         'Interessante! 💭 Mas meu foco é suporte. Posso ajudar com algo técnico?'
       ],
+      OFF_TOPIC_POESIA: [
+        'Legal a criatividade! 🎭 Mas aqui é puro suporte técnico. Tem dúvida sobre o sistema?',
+        'Ótima rima! ✨ Mas vamos voltar ao técnico? O que você precisa do sistema Inovar?'
+      ],
+      OFF_TOPIC_CAPS: [
+        'Opa, acalma aí! 😄 Fale comigo sem maiúsculas? Qual é a dúvida sobre o sistema?',
+        'Tudo bem, mas fala mais baixo! 📢 Em que posso ajudar com o Inovar?'
+      ],
       VAGO: [
         'Hmm, entendi... 🤔 Pode ser mais específico? Qual é a sua dúvida exatamente?',
         'Entendi! 😊 Mas preciso de mais detalhes para te ajudar. Qual é o problema?',
@@ -50,9 +58,9 @@ class welcomeMessage {
   /**
    * Gerar resposta (tenta padrão primeiro, depois Ollama se necessário)
    */
-  async gerarResposta(mensagem, tipo) {
+  async gerarResposta(mensagem, tipo, validacao = null) {
     // Tentar resposta padrão primeiro (muito mais rápida)
-    const respostaPadrao = this._obterRespostaPadrao(tipo);
+    const respostaPadrao = this._obterRespostaPadrao(tipo, validacao);
     if (respostaPadrao) {
       return {
         resposta: respostaPadrao,
@@ -66,9 +74,29 @@ class welcomeMessage {
   }
 
   /**
-   * Obter resposta padrão (aleatória para não parecer robótico)
+   * Obter resposta padrão inteligente (aleatória para não parecer robótico)
    */
-  _obterRespostaPadrao(tipo) {
+  _obterRespostaPadrao(tipo, validacao = null) {
+    // Se tem validação e detectamos padrão específico, usar resposta customizada
+    if (validacao) {
+      // OFF-TOPIC com poesia detectada
+      if (validacao.categorias.temPoesiasOuRimas && tipo === 'OFF_TOPIC') {
+        const respostas = this.respostasPadrao.OFF_TOPIC_POESIA;
+        if (respostas && respostas.length > 0) {
+          return respostas[Math.floor(Math.random() * respostas.length)];
+        }
+      }
+
+      // OFF-TOPIC com CAPS detectado
+      if (parseInt(validacao.scoreCoerencia * 100) > 50 && tipo === 'OFF_TOPIC') {
+        const respostas = this.respostasPadrao.OFF_TOPIC_CAPS;
+        if (respostas && respostas.length > 0) {
+          return respostas[Math.floor(Math.random() * respostas.length)];
+        }
+      }
+    }
+
+    // Resposta padrão por tipo
     const respostas = this.respostasPadrao[tipo];
 
     if (!respostas || respostas.length === 0) {
@@ -169,4 +197,4 @@ Não ficou claro. Peça para esclarecer. Tom amigável, curto.`
   }
 }
 
-module.exports = welcomeMessage;
+module.exports = responseGenerator;

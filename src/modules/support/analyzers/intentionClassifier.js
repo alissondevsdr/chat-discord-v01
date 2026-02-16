@@ -2,15 +2,17 @@
  * 🧭 DETECTOR DE INTENÇÃO
  * Classifica mensagens em categorias e coordena respostas apropriadas
  * 
- * Versão: 2.0 (com suporte a respostas coloquiais)
+ * Versão: 3.0 (com validação de contexto semântico)
  * Padrão: camelCase, integrado ao fluxo existente
  */
 
-const welcomeMessage = require('./welcomeMessage');
+const responseGenerator = require('../generators/responseGenerator');
+const messageAnalyzer = require('./messageAnalyzer');
 
 class DetectIntention {
   constructor() {
-    this.generador = new welcomeMessage();
+    this.generador = new responseGenerator();
+    this.validadorContexto = new messageAnalyzer();
 
     // Padrões de saudação
     this.padroesSaudacao = [
@@ -46,31 +48,44 @@ class DetectIntention {
   }
 
   /**
-   * Classificar mensagem e retornar tipo + resposta (se aplicável)
+   * Classificar mensagem com validação de contexto e gerar resposta
    */
   async classificarComResposta(mensagem) {
+    // Primeira: Validar contexto
+    const validacao = this.validadorContexto.validar(mensagem);
+    const acao = this.validadorContexto.sugerirAcao(validacao);
+
     const classificacao = this.classificar(mensagem);
 
+    // Combinar análise de intenção com validação de contexto
+    const analiseCompleta = {
+      ...classificacao,
+      validacaoContexto: validacao,
+      acaoRecomendada: acao,
+      confianca: Math.min(classificacao.confianca * validacao.score, 1.0)
+    };
+
     // Se for resposta coloquial, gera também a resposta
-    if (['SAUDACAO', 'OFF_TOPIC', 'VAGO', 'INDEFINIDO'].includes(classificacao.tipo)) {
-      const resposta = await this.generador.gerarResposta(mensagem, classificacao.tipo);
+    if (['SAUDACAO', 'OFF_TOPIC', 'VAGO', 'INDEFINIDO'].includes(analiseCompleta.tipo)) {
+      const resposta = await this.generador.gerarResposta(mensagem, analiseCompleta.tipo, validacao);
 
       return {
-        ...classificacao,
+        ...analiseCompleta,
         resposta: resposta.resposta,
         fonteFesposta: resposta.fonte,
         latencia: resposta.latencia
       };
     }
 
-    return classificacao;
+    return analiseCompleta;
   }
 
   /**
-   * Classificar a mensagem em uma das 6 categorias
+   * Classificar a mensagem em uma das 6 categorias (V3 - mais inteligente)
    */
   classificar(mensagem) {
     const msg = mensagem.trim().toLowerCase();
+    const validacao = this.validadorContexto.validar(msg);
 
     // 1. COMANDO
     if (msg.startsWith('!')) {
@@ -90,31 +105,33 @@ class DetectIntention {
       };
     }
 
-    // 3. VAGO
-    if (this._ehMuitoCurta(msg)) {
+    // 3. OFF_TOPIC (baseado em validação)
+    const offtopic = validacao?.categorias?.offtopic || false;
+    if (offtopic) {
+      return {
+        tipo: 'OFF_TOPIC',
+        confianca: Math.min(validacao.scoreOffTopic || 0, 1.0),
+        descricao: 'Não relacionada a suporte',
+        motivo: validacao.motivo
+      };
+    }
+
+    // 4. VAGO (mensagem muito curta ou sem contexto)
+    const scoreRelevancia = validacao?.scoreRelevancia || 0;
+    if (this._ehMuitoCurta(msg) || scoreRelevancia < 0.2) {
       return {
         tipo: 'VAGO',
-        confianca: 0.8,
+        confianca: 0.7,
         descricao: 'Mensagem vaga ou muito curta'
       };
     }
 
-    // 4. OFF_TOPIC
-    const scoreOffTopic = this._calcularScoreOffTopic(msg);
-    if (scoreOffTopic > 0.6) {
-      return {
-        tipo: 'OFF_TOPIC',
-        confianca: scoreOffTopic,
-        descricao: 'Não relacionada a suporte'
-      };
-    }
-
-    // 5. SUPORTE
+    // 5. SUPORTE (tem palavras-chave e contexto válido)
     const scoreSuporte = this._calcularScoreSuporte(msg);
-    if (scoreSuporte > 0.4) {
+    if (scoreSuporte > 0.3 || scoreRelevancia > 0.5) {
       return {
         tipo: 'SUPORTE',
-        confianca: scoreSuporte,
+        confianca: Math.min(scoreSuporte * 0.7 + scoreRelevancia * 0.3, 1.0),
         descricao: 'Pergunta sobre o sistema'
       };
     }
@@ -122,7 +139,7 @@ class DetectIntention {
     // 6. INDEFINIDO
     return {
       tipo: 'INDEFINIDO',
-      confianca: 0.5,
+      confianca: validacao?.score || 0,
       descricao: 'Não classificado com certeza'
     };
   }
@@ -196,6 +213,28 @@ class DetectIntention {
     };
 
     return info[tipo] || { emoji: '❓', desc: 'Desconhecido' };
+  }
+
+  /**
+   * Obter validação de contexto para uma mensagem
+   */
+  obterValidacaoContexto(mensagem) {
+    return this.validadorContexto.validar(mensagem);
+  }
+
+  /**
+   * Obter análise completa (para debug)
+   */
+  async obterAnaliseCompleta(mensagem) {
+    const resposta = await this.classificarComResposta(mensagem);
+    const validacao = this.validadorContexto.obterAnaliseDetalhada(mensagem);
+
+    return {
+      mensagem,
+      classificacao: resposta,
+      validacao: validacao,
+      timestamp: new Date().toISOString()
+    };
   }
 }
 

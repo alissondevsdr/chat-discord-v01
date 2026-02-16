@@ -1,13 +1,15 @@
 const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { QdrantClient } = require('@qdrant/js-client-rest');
 const { pipeline } = require('@xenova/transformers');
-const Human = require('./utils/Human');
+const IntentionClassifier = require('./modules/support/analyzers/intentionClassifier');
+const MessageAnalyzer = require('./modules/support/analyzers/messageAnalyzer');
+const SolutionHumanizer = require('./modules/support/generators/solutionHumanizer');
+const ResponseGenerator = require('./modules/support/generators/responseGenerator');
 const fs = require('fs');
-const DetectIntention = require('./utils/detectIntention');
 require('dotenv').config();
 
 let humanizador = null;
-let detectIntention = null;
+let intentionClassifier = null;
 
 // ==========================================
 // 1. CONFIGURAÇÕES
@@ -27,7 +29,7 @@ const qdrant = new QdrantClient({
 });
 
 const COLLECTION_NAME = 'solucoes_inovar';
-const JSON_FILE = './utils/solutions.json';
+const JSON_FILE = './data/solutions.json';
 let extractor;
 
 // ==========================================
@@ -37,16 +39,16 @@ async function prepararIA() {
   registrarLog('INFO', '🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...');
   extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
 
-  // Inicializar detector de intenção (V2.0 com respostas coloquiais)
-  registrarLog('INFO', '🧭 Inicializando Detector de Intenção v2.0...');
-  detectIntention = new DetectIntention();
+  // Inicializar detector de intenção
+  registrarLog('INFO', '🧭 Inicializando Detector de Intenção.');
+  intentionClassifier = new IntentionClassifier();
   registrarLog('INFO', '✅ Detector de Intenção pronto!');
 
-  // Inicializar humanizador se ativado
+  // Inicializar humanizador
   const USAR_HUMANIZACAO = process.env.USAR_HUMANIZACAO === 'true';
   if (USAR_HUMANIZACAO) {
     registrarLog('INFO', '✨ Inicializando Humanizador (Ollama)...');
-    humanizador = new Human();
+    humanizador = new SolutionHumanizer();
 
     const ollamaOk = await humanizador.testarConexao();
     if (ollamaOk) {
@@ -73,10 +75,18 @@ try {
   process.exit(1);
 }
 
+const LOG_DIR = './logs';
+const LOG_FILE = `${LOG_DIR}/log.txt`;
+
+// Criar diretório se não existir
+if (!fs.existsSync(LOG_DIR)) {
+  fs.mkdirSync(LOG_DIR, { recursive: true });
+}
+
 function registrarLog(tipo, mensagem) {
   const timestamp = new Date().toLocaleString('pt-BR');
   const linha = `[${timestamp}] ${tipo}: ${mensagem}\n`;
-  fs.appendFileSync('log.txt', linha);
+  fs.appendFileSync(LOG_FILE, linha);
   console.log(linha.trim());
 }
 
@@ -153,14 +163,25 @@ async function salvarNovaSolucao(problema, solucao, palavrasChave, tags, canalId
 async function processarMensagem(message) {
   try {
     // Classificar e gerar resposta se necessário
-    const analise = await detectIntention.classificarComResposta(message.content);
-    const info = detectIntention.obterInfo(analise.tipo);
+    const analise = await intentionClassifier.classificarComResposta(message.content);
+    const info = intentionClassifier.obterInfo(analise.tipo);
+    const validacao = analise.validacaoContexto;
+    const acao = analise.acaoRecomendada;
 
     console.log(`\n[ANALYSIS] ${info.emoji} ${analise.tipo} (confiança: ${(analise.confianca * 100).toFixed(0)}%)`);
 
+    if (validacao && validacao.scoreRelevancia !== undefined) {
+      const scoreRelevancia = validacao.scoreRelevancia || 0;
+      const scoreOffTopic = validacao.scoreOffTopic || 0;
+      const scoreCoerencia = validacao.scoreCoerencia || 0;
+      const estrutura = validacao?.categorias?.estrutura || 'INDEFINIDO';
+      console.log(`[CONTEXT] 📊 Relevância: ${(scoreRelevancia * 100).toFixed(0)}% | Off-Topic: ${(scoreOffTopic * 100).toFixed(0)}%`);
+      console.log(`[CONTEXT] 🔍 Estrutura: ${estrutura} | Coerência: ${(scoreCoerencia * 100).toFixed(0)}%`);
+    }
+
     // --- SAUDAÇÃO ---
     if (analise.tipo === 'SAUDACAO') {
-      console.log(`[ANALYSIS] 💬 Respondendo com mensagem coloquial...`);
+      console.log(`[ACTION] 💬 Respondendo com mensagem coloquial...`);
 
       const embed = new EmbedBuilder()
         .setColor(0x3498db)
@@ -174,7 +195,8 @@ async function processarMensagem(message) {
 
     // --- OFF-TOPIC ---
     if (analise.tipo === 'OFF_TOPIC') {
-      console.log(`[ANALYSIS] ❌ Mensagem fora do escopo`);
+      console.log(`[ACTION] ❌ Mensagem detectada como off-topic`);
+      console.log(`[REASON] ${validacao.motivo}`);
 
       const embed = new EmbedBuilder()
         .setColor(0xe74c3c)
@@ -182,13 +204,13 @@ async function processarMensagem(message) {
         .setFooter({ text: 'Inovar Sistemas • Foco: Suporte Técnico' });
 
       await message.reply({ embeds: [embed] });
-      registrarLog('INFO', `❌ Off-topic rejeitado gentilmente`);
+      registrarLog('INFO', `❌ Off-topic rejeitado gentilmente (${validacao.motivo})`);
       return;
     }
 
     // --- VAGO ---
     if (analise.tipo === 'VAGO') {
-      console.log(`[ANALYSIS] ❓ Mensagem vaga`);
+      console.log(`[ACTION] ❓ Mensagem vaga - pedindo clarificação`);
 
       const embed = new EmbedBuilder()
         .setColor(0xf39c12)
@@ -205,9 +227,25 @@ async function processarMensagem(message) {
       return processarComando(message);
     }
 
-    // --- SUPORTE ou INDEFINIDO ---
+    // --- SUPORTE ou INDEFINIDO com validação ---
     if (analise.tipo === 'SUPORTE' || analise.tipo === 'INDEFINIDO') {
-      console.log(`[ANALYSIS] 🔍 Buscando solução na base...`);
+      // Se não validar contexto, pedir clarificação
+      const scoreRelevancia = validacao?.scoreRelevancia || 0;
+      const valido = validacao?.valido !== false;
+
+      if (!valido && scoreRelevancia < 0.3) {
+        console.log(`[ACTION] ❓ Contexto inválido - rejeitando`);
+        const embed = new EmbedBuilder()
+          .setColor(0xf39c12)
+          .setDescription(`Hmm, sua pergunta não ficou clara... 🤔\n\nPode me detalhar melhor? Qual é a dúvida específica sobre o sistema Inovar?`)
+          .setFooter({ text: 'Inovar Sistemas' });
+
+        await message.reply({ embeds: [embed] });
+        registrarLog('INFO', `❓ Contexto inválido - esclarecimento solicitado`);
+        return;
+      }
+
+      console.log(`[ACTION] 🔍 Buscando solução na base...`);
       return processarSuporte(message);
     }
 
@@ -284,11 +322,13 @@ async function processarComando(message) {
   const comando = partes[0].toLowerCase();
 
   if (comando === '!ajuda') {
-    const ajuda = `**🤖 Suporte IA Inovar (v0.4.0)**\n\n` +
+    const ajuda = `**🤖 Suporte IA Inovar (v0.5.0 - Smart Context)**\n\n` +
       `**Conversar:** Digite uma saudação ou pergunta normalmente.\n` +
       `**Perguntar:** Dúvida sobre o sistema - busca automática.\n` +
       `**Salvar:** \`!salvar | título | solução | palavras | tags\`\n` +
-      `**Listar:** \`!listar\``;
+      `**Listar:** \`!listar\`\n` +
+      `**Debug:** \`!debug <pergunta>\` - análise de busca\n` +
+      `**Análise:** \`!analise <mensagem>\` - análise completa de intenção`;
     await message.reply(ajuda);
     return;
   }
@@ -339,6 +379,38 @@ async function processarComando(message) {
     }
 
     await message.reply(debug);
+    return;
+  }
+
+  if (comando === '!analise') {
+    if (partes.length < 2) {
+      await message.reply('Use: `!analise <sua mensagem>`');
+      return;
+    }
+
+    const textoPraAnalisar = partes.slice(1).join(' ');
+    const analiseCompleta = await intentionClassifier.obterAnaliseCompleta(textoPraAnalisar);
+    const val = analiseCompleta.validacao;
+
+    let resposta = `**📊 ANÁLISE COMPLETA: "${textoPraAnalisar}"\n\n`;
+    resposta += `🎯 **Classificação:** ${analiseCompleta.classificacao.tipo} (${(analiseCompleta.classificacao.confianca * 100).toFixed(0)}%)\n`;
+    resposta += `📈 **Relevância ao Sistema:** ${(val.scoreRelevancia * 100).toFixed(0)}%\n`;
+    resposta += `🚨 **Off-Topic Score:** ${(val.scoreOffTopic * 100).toFixed(0)}%\n`;
+    resposta += `🔧 **Estrutura:** ${val.categorias.estrutura}\n`;
+    resposta += `✅ **Coerência:** ${(val.scoreCoerencia * 100).toFixed(0)}%\n`;
+    resposta += `\n💡 **Motivo:** ${val.motivo}\n`;
+    resposta += `🎬 **Ação Recomendada:** ${analiseCompleta.classificacao.acaoRecomendada}\n`;
+
+    if (analiseCompleta.classificacao.resposta) {
+      resposta += `\n📝 **Resposta Gerada:** ${analiseCompleta.classificacao.resposta.substring(0, 200)}...\n`;
+    }
+
+    resposta += `\n📌 **Detalhes da Validação:**\n`;
+    resposta += `• Poesia/Rimas: ${val.categorias.temPoesiasOuRimas ? 'SIM ⚠️' : 'não'}\n`;
+    resposta += `• Maiúsculas: ${val.scoreCoerencia > 0.5 ? 'Normal ✅' : 'Suspeito 🚩'}\n`;
+    resposta += `• Valido: ${val.valido ? 'SIM ✅' : 'NÃO ❌'}\n` + '```';
+
+    await message.reply(resposta);
     return;
   }
 }
