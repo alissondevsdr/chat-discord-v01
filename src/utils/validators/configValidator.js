@@ -1,22 +1,27 @@
 /**
  * ⚙️ CONFIGURAÇÕES DO VALIDADOR DE CONTEXTO
  * Ajuste estes parâmetros para tunar o comportamento do bot
+ * 
+ * 💡 TIP: Valores para scoreConfig podem ser sobrescritos via variáveis de ambiente
+ * Exemplos: THRESHOLD_MINIMO, THRESHOLD_RELACIONADAS, etc (veja .env)
  */
+
+require('dotenv').config();
 
 module.exports = {
   // 🎯 SCORE LIMITES
   scoreConfig: {
     // Score mínimo de relevância para considerar uma pergunta válida
-    minRelevanciaParaValida: 0.25,
+    minRelevanciaParaValida: parseFloat(process.env.THRESHOLD_MINIMO) || 0.25,
 
     // Score máximo de off-topic para não rejeitar automaticamente
-    maxOffTopicParaAceitar: 0.5,
+    maxOffTopicParaAceitar: parseFloat(process.env.THRESHOLD_OFFTOPIC_MAX) || 0.5,
 
     // Score mínimo de coerência para aceitar
-    minCoerenciaParaValida: 0.2,
+    minCoerenciaParaValida: parseFloat(process.env.THRESHOLD_COERENCIA_MIN) || 0.2,
 
     // Score mínimo geral para considerar mensagem válida (sem contexto positivo)
-    minScoreGeralParaValida: 0.35,
+    minScoreGeralParaValida: parseFloat(process.env.THRESHOLD_SCORE_GERAL_MIN) || 0.35,
 
     // Comprimento mínimo de mensagem (caracteres)
     minComprimento: 3,

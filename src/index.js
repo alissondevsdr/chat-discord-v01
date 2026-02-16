@@ -32,6 +32,13 @@ const COLLECTION_NAME = 'solucoes_inovar';
 const JSON_FILE = './data/solutions.json';
 let extractor;
 
+// ⚙️ THRESHOLDS DE BUSCA (PUXADOS DO .ENV)
+const THRESHOLD_BUSCA = parseFloat(process.env.THRESHOLD_BUSCA) || 0.65;  // Limiar principal de relevância
+const THRESHOLD_MINIMO = parseFloat(process.env.THRESHOLD_MINIMO) || 0.50;  // Mínimo para aceitar resultado
+const THRESHOLD_HUMANIZACAO = parseFloat(process.env.THRESHOLD_HUMANIZACAO) || 0.60;  // Confiança para humanizar
+const THRESHOLD_CONFIANCA_ALTA = parseFloat(process.env.THRESHOLD_CONFIANCA_ALTA) || 0.75;  // Para cor verde
+const THRESHOLD_RELACIONADAS = parseFloat(process.env.THRESHOLD_RELACIONADAS) || 0.40;  // Para mostrar soluções relacionadas
+
 // ==========================================
 // 2. PREPARAÇÃO DE IA
 // ==========================================
@@ -262,17 +269,17 @@ async function processarSuporte(message) {
     console.log(`[ANALYSIS] 🔎 Pergunta: "${message.content}"`);
     console.log(`[ANALYSIS] 🎯 Match: "${resultados[0].payload.problema}"`);
     console.log(`[ANALYSIS] 📊 Score: ${resultados[0].score.toFixed(4)}`);
-    console.log(`[ANALYSIS] 🚦 Status: ${resultados[0].score > 0.50 ? '✅ APROVADO' : '❌ REJEITADO'}\n`);
+    console.log(`[ANALYSIS] 🚦 Status: ${resultados[0].score > THRESHOLD_MINIMO ? '✅ APROVADO' : '❌ REJEITADO'}\n`);
   }
 
-  if (resultados.length > 0 && resultados[0].score > 0.50) {
+  if (resultados.length > 0 && resultados[0].score > THRESHOLD_MINIMO) {
     const principal = resultados[0].payload;
     const confianca = (resultados[0].score * 100).toFixed(1);
 
     let solucaoExibida = principal.solucao;
     let humanizada = false;
 
-    if (humanizador && confianca >= 60) {
+    if (humanizador && confianca >= (THRESHOLD_HUMANIZACAO * 100)) {
       registrarLog('INFO', `🎨 Humanizando solução #${principal.id}...`);
       try {
         solucaoExibida = await humanizador.humanizar(principal, message.content);
@@ -284,26 +291,16 @@ async function processarSuporte(message) {
       }
     }
 
-    const corEmbed = resultados[0].score > 0.75 ? 0x2ecc71 : 0xf1c40f;
+    // Registrar informações detalhadas no log
+    registrarLog('INFO', `✅ Confiança: ${confianca}% | ID: #${principal.id} | Status: ${humanizada ? '🎨 Humanizada' : '📖 Original'}`);
 
-    const embed = new EmbedBuilder()
-      .setColor(corEmbed)
-      .setTitle(`✅ Solução: ${principal.problema}`)
-      .setDescription(solucaoExibida.replace(/@everyone/g, ''))
-      .addFields(
-        { name: 'Confiança', value: `**${confianca}%**`, inline: true },
-        { name: 'ID', value: `#${principal.id}`, inline: true },
-        { name: 'Status', value: humanizada ? '🎨 Humanizada' : '📖 Original', inline: true }
-      )
-      .setFooter({ text: 'Inovar Sistemas • Suporte IA Semântico' });
+    // Formatar resposta com título e conteúdo bem estruturado
+    const respostaPronta = `**${principal.problema}**\n\n${solucaoExibida.replace(/@everyone/g, '')}`;
 
-    const msgResposta = await message.reply({ embeds: [embed] });
+    // Enviar resposta como mensagem normal (sem embed)
+    const msgResposta = await message.reply(respostaPronta);
 
-    await msgResposta.react('👍');
-    await msgResposta.react('👎');
-    if (humanizada) await msgResposta.react('🤖');
-
-    const relacionadas = resultados.slice(1).filter(r => r.score > 0.40);
+    const relacionadas = resultados.slice(1).filter(r => r.score > THRESHOLD_RELACIONADAS);
     if (relacionadas.length > 0) {
       let textoRel = `**🔗 Relacionadas:**\n`;
       relacionadas.forEach(r => {
