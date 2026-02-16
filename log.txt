@@ -147,3 +147,20 @@
 [13/02/2026, 09:53:18] INFO: ✅ Ollama conectado! Humanização ativa.
 [13/02/2026, 09:53:18] INFO: ✅ IA Pronta! Sistema: Busca Vetorial + Detector Intenção + Respostas Coloquiais.
 [13/02/2026, 09:53:18] INFO: ✅ Bot conectado como Chatbot Suporte Inovar#3095
+[13/02/2026, 19:04:07] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[13/02/2026, 19:04:08] INFO: 🧭 Inicializando Detector de Intenção v2.0...
+[13/02/2026, 19:04:08] INFO: ✅ Detector de Intenção pronto!
+[13/02/2026, 19:04:08] INFO: ✨ Inicializando Humanizador (Ollama)...
+[13/02/2026, 19:04:08] INFO: ✅ Ollama conectado! Humanização ativa.
+[13/02/2026, 19:04:08] INFO: ✅ IA Pronta! Sistema: Busca Vetorial + Detector Intenção + Respostas Coloquiais.
+[13/02/2026, 19:04:08] INFO: ✅ Bot conectado como Chatbot Suporte Inovar#3095
+[13/02/2026, 19:13:47] INFO: 💬 Saudação respondida (PADRAO)
+[13/02/2026, 19:13:51] INFO: 💬 Saudação respondida (PADRAO)
+[13/02/2026, 19:15:42] INFO: 🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...
+[13/02/2026, 19:15:42] INFO: 🧭 Inicializando Detector de Intenção v2.0...
+[13/02/2026, 19:15:42] INFO: ✅ Detector de Intenção pronto!
+[13/02/2026, 19:15:42] INFO: ✨ Inicializando Humanizador (Ollama)...
+[13/02/2026, 19:15:42] INFO: ✅ Ollama conectado! Humanização ativa.
+[13/02/2026, 19:15:42] INFO: ✅ IA Pronta! Sistema: Busca Vetorial + Detector Intenção + Respostas Coloquiais.
+[13/02/2026, 19:15:42] INFO: ✅ Bot conectado como Chatbot Suporte Inovar#3095
+[13/02/2026, 19:15:49] INFO: 💬 Saudação respondida (PADRAO)
