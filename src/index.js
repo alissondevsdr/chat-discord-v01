@@ -416,7 +416,7 @@ async function processarComando(message) {
 // 6. EVENTOS DO DISCORD
 // ==========================================
 
-client.once('ready', async () => {
+client.once('clientReady', async () => {
   await prepararIA();
   registrarLog('INFO', `✅ Bot conectado como ${client.user.tag}`);
 });
