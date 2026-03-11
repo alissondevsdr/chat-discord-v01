@@ -24,6 +24,13 @@ class Humanizador {
   async humanizar(solucaoOriginal, perguntaUsuario) {
     const tempoInicio = Date.now();
 
+    // Limpeza automática antes de verificar cache
+    const limiteCache = parseInt(process.env.LIMITE_CACHE) || 1000;
+    if (this.cache.size >= limiteCache) {
+      this.limparCache(Math.floor(limiteCache * 0.8)); // mantém 80% ao limpar
+      console.log(`🧹 Cache auto-limpado. Novo tamanho: ${this.cache.size}`);
+    }
+
     // Montar chave de cache
     const chave = this._gerarChave(solucaoOriginal.id, perguntaUsuario);
 

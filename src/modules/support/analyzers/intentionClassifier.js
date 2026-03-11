@@ -14,6 +14,10 @@ class DetectIntention {
     this.generador = new responseGenerator();
     this.validadorContexto = new messageAnalyzer();
 
+    this.urlOllama = process.env.URL_OLLAMA || 'http://127.0.0.1:11434';
+    this.modelo = process.env.MODELO_OLLAMA || 'qwen1.5b-safe:latest';
+    this.ollamaDisponivel = process.env.USAR_HUMANIZACAO === 'true';
+
     // Padrões de saudação
     this.padroesSaudacao = [
       /^(olá|oi|opa|e aí|e ai|tudo bem|como vai|bom dia|boa tarde|boa noite|hey|hi|hello)/i,
@@ -55,7 +59,10 @@ class DetectIntention {
     const validacao = this.validadorContexto.validar(mensagem);
     const acao = this.validadorContexto.sugerirAcao(validacao);
 
-    const classificacao = this.classificar(mensagem);
+    // Usa Ollama se disponível, senão cai no regex
+    const classificacao = this.ollamaDisponivel
+      ? await this.classificarComOllama(mensagem)
+      : this.classificar(mensagem);
 
     // Combinar análise de intenção com validação de contexto
     const analiseCompleta = {
@@ -78,6 +85,55 @@ class DetectIntention {
     }
 
     return analiseCompleta;
+  }
+
+  async classificarComOllama(mensagem) {
+    const prompt = `Você é um classificador de mensagens para suporte técnico de um sistema ERP chamado Inovar Sistemas.
+
+Classifique a mensagem abaixo em UMA das categorias:
+- SAUDACAO: cumprimentos, agradecimentos, despedidas
+- SUPORTE: dúvidas, problemas, erros sobre o sistema Inovar
+- OFF_TOPIC: assuntos sem relação com o sistema (política, esportes, entretenimento, etc)
+- VAGO: mensagem muito curta ou sem contexto suficiente para entender
+- COMANDO: começa com "!" (ex: !ajuda, !listar)
+
+Responda APENAS com um JSON no formato:
+{"tipo": "CATEGORIA", "confianca": 0.0, "motivo": "explicação curta"}
+
+Mensagem: "${mensagem}"`;
+
+    try {
+      // Usamos fetch local
+      const fetch = require('node-fetch');
+      const response = await fetch(`${this.urlOllama}/api/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: this.modelo,
+          prompt,
+          stream: false,
+          options: { temperature: 0.1, num_predict: 100 }
+        })
+      });
+
+      const data = await response.json();
+      const texto = data.response.trim();
+
+      // Remove possíveis blocos de código markdown
+      const jsonLimpo = texto.replace(/```json|```/g, '').trim();
+      const resultado = JSON.parse(jsonLimpo);
+
+      return {
+        tipo: resultado.tipo || 'INDEFINIDO',
+        confianca: resultado.confianca || 0.7,
+        descricao: resultado.motivo || '',
+        fonte: 'OLLAMA'
+      };
+    } catch (erro) {
+      // Fallback para classificação por regex se Ollama falhar
+      console.warn(`⚠️ Ollama indisponível para classificação: ${erro.message}`);
+      return this.classificar(mensagem); // método existente com regex
+    }
   }
 
   /**

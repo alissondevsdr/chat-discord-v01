@@ -24,8 +24,8 @@ async function popularQdrant() {
     }
 
     // 2. Carregar Modelo de IA (Cérebro do Sistema)
-    console.log('🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...');
-    const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    console.log('🧠 Carregando modelo de IA (multilingual-e5-small)...');
+    const extractor = await pipeline('feature-extraction', 'Xenova/multilingual-e5-small');
 
     // 3. Carregar e Processar Dados
     console.log('📚 Carregando dados do arquivo...');

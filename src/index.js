@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, EmbedBuilder } = require('discord.js');
+const { Client, GatewayIntentBits, EmbedBuilder, Partials } = require('discord.js');
 const { QdrantClient } = require('@qdrant/js-client-rest');
 const { pipeline } = require('@xenova/transformers');
 const IntentionClassifier = require('./modules/support/analyzers/intentionClassifier');
@@ -19,7 +19,10 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.DirectMessageTyping,
   ],
+  partials: [Partials.Channel, Partials.Message],
 });
 
 const qdrant = new QdrantClient({
@@ -43,8 +46,8 @@ const THRESHOLD_RELACIONADAS = parseFloat(process.env.THRESHOLD_RELACIONADAS) ||
 // 2. PREPARAÇÃO DE IA
 // ==========================================
 async function prepararIA() {
-  registrarLog('INFO', '🧠 Carregando modelo de IA (all-MiniLM-L6-v2)...');
-  extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+  registrarLog('INFO', '🧠 Carregando modelo de IA (multilingual-e5-small)...');
+  extractor = await pipeline('feature-extraction', 'Xenova/multilingual-e5-small');
 
   // Inicializar detector de intenção
   registrarLog('INFO', '🧭 Inicializando Detector de Intenção.');
@@ -262,8 +265,82 @@ async function processarMensagem(message) {
   }
 }
 
+async function reescreverPergunta(perguntaOriginal) {
+  try {
+    const response = await fetch(`${process.env.URL_OLLAMA}/api/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: process.env.MODELO_OLLAMA,
+        prompt: `Você é especialista em sistemas ERP de gestão comercial.
+Reformule a pergunta abaixo em linguagem técnica, em 1-2 frases objetivas.
+Não responda a pergunta, apenas reformule-a.
+
+Pergunta original: "${perguntaOriginal}"
+Pergunta reformulada:`,
+        stream: false,
+        options: { temperature: 0.1, num_predict: 80 }
+      })
+    });
+
+    const data = await response.json();
+    const reformulada = data.response.trim();
+
+    registrarLog('INFO', `🔄 Pergunta reformulada: "${reformulada}"`);
+    return reformulada;
+  } catch (erro) {
+    registrarLog('AVISO', `⚠️ Reescrita falhou, usando original: ${erro.message}`);
+    return perguntaOriginal; // fallback seguro
+  }
+}
+
+async function buscarComMultiQuery(pergunta) {
+  try {
+    const response = await fetch(`${process.env.URL_OLLAMA}/api/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: process.env.MODELO_OLLAMA,
+        prompt: `Gere 3 formas diferentes de perguntar sobre o mesmo problema de sistema ERP.
+Responda apenas com as 3 perguntas, uma por linha, sem numeração.
+
+Pergunta original: "${pergunta}"`,
+        stream: false,
+        options: { temperature: 0.4, num_predict: 150 }
+      })
+    });
+
+    const data = await response.json();
+    const variacoes = [
+      pergunta,
+      ...data.response.trim().split('\\n').filter(l => l.trim()).slice(0, 3)
+    ];
+
+    // Busca paralela com todas as variações
+    const todosResultados = await Promise.all(
+      variacoes.map(v => buscarSolucaoIA(v))
+    );
+
+    // Junta, remove duplicatas por ID e ordena por score
+    const mapa = new Map();
+    todosResultados.flat().forEach(r => {
+      if (!mapa.has(r.id) || mapa.get(r.id).score < r.score) {
+        mapa.set(r.id, r);
+      }
+    });
+
+    return Array.from(mapa.values()).sort((a, b) => b.score - a.score);
+  } catch {
+    return buscarSolucaoIA(pergunta); // fallback
+  }
+}
+
 async function processarSuporte(message) {
-  const resultados = await buscarSolucaoIA(message.content);
+  // Reescrever antes de buscar
+  const perguntaOtimizada = await reescreverPergunta(message.content);
+
+  // Busca com a pergunta otimizada (mantém fallback para original)
+  const resultados = await buscarComMultiQuery(perguntaOtimizada);
 
   if (resultados.length > 0) {
     console.log(`[ANALYSIS] 🔎 Pergunta: "${message.content}"`);
@@ -416,13 +493,26 @@ async function processarComando(message) {
 // 6. EVENTOS DO DISCORD
 // ==========================================
 
-client.once('clientReady', async () => {
+client.once('ready', async () => {
   await prepararIA();
   registrarLog('INFO', `✅ Bot conectado como ${client.user.tag}`);
 });
 
 client.on('messageCreate', async (message) => {
-  if (message.author.bot || message.channel.id !== process.env.CANAL_SUPORTE_ID) return;
+  if (message.author.bot) return;
+
+  const isDM = message.channel.type === 1; // ChannelType.DM = 1
+
+  if (!isDM) {
+    try {
+      await message.author.send(
+        '👋 Oi! Para dúvidas sobre o sistema, me manda uma mensagem aqui no privado. Estou pronto para ajudar!'
+      );
+    } catch {
+      // Usuário pode ter DMs desabilitadas — ignora silenciosamente
+    }
+    return;
+  }
 
   await processarMensagem(message);
 });

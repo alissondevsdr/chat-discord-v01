@@ -273,7 +273,7 @@ class messageAnalyzer {
   _extrairRima(linha) {
     const palavras = linha.trim().toLowerCase().split(/\s+/);
     if (palavras.length === 0) return null;
-    return palavras[palavras.length - 1].substring(-3); // Últimas 3 caracteres
+    return palavras[palavras.length - 1].slice(-3); // Últimas 3 caracteres
   }
 
   /**
@@ -281,7 +281,7 @@ class messageAnalyzer {
    */
   _saoParecidas(palavra1, palavra2) {
     if (!palavra1 || !palavra2) return false;
-    return palavra1.substring(-2) === palavra2.substring(-2);
+    return palavra1.slice(-2) === palavra2.slice(-2);
   }
 
   /**
