@@ -1,52 +1,29 @@
 const { QdrantClient } = require('@qdrant/js-client-rest');
-const { pipeline } = require('@xenova/transformers');
 const fs = require('fs');
+const path = require('path');
+const config = require('../core/config');
+const embeddingService = require('../services/embeddingService');
 
 async function popularQdrant() {
-  // Configurações Iniciais
-  const client = new QdrantClient({ url: 'http://localhost:6333' });
-  const COLLECTION_NAME = 'solucoes_inovar';
-  const DATA_FILE = 'solutions.json';
+  const COLLECTION_NAME = config.COLLECTION_NAME;
+  const DATA_FILE = config.JSON_FILE;
 
-  console.log('🚀 Iniciando população otimizada com PESO DE CAMPO...');
+  console.log('🚀 Iniciando população (Fase 1: Geração de Vetores)...');
 
   try {
-    // 1. AUTO-SETUP: Garante que a coleção existe antes de inserir
-    const collections = await client.getCollections();
-    const existe = collections.collections.find(c => c.name === COLLECTION_NAME);
-
-    if (!existe) {
-      console.log(`🏗️ Criando coleção "${COLLECTION_NAME}" (384 dimensões)...`);
-      await client.createCollection(COLLECTION_NAME, {
-        vectors: { size: 384, distance: 'Cosine' }
-      });
-      console.log('✅ Coleção criada com sucesso!');
+    if (!fs.existsSync(DATA_FILE)) {
+      throw new Error(`Arquivo não encontrado: ${DATA_FILE}`);
     }
 
-    // 2. Carregar Modelo de IA (Cérebro do Sistema)
-    console.log('🧠 Carregando modelo de IA (multilingual-e5-small)...');
-    const extractor = await pipeline('feature-extraction', 'Xenova/multilingual-e5-small');
-
-    // 3. Carregar e Processar Dados
-    console.log('📚 Carregando dados do arquivo...');
     const dados = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
     const pontos = [];
 
-    console.log(`🔄 Gerando vetores para ${dados.solucoes.length} itens...`);
+    // FASE 1: APENAS IA (Sem Rede)
+    console.log(`🧠 Gerando embeddings para ${dados.solucoes.length} itens...`);
+    for (let i = 0; i < dados.solucoes.length; i++) {
+      const sol = dados.solucoes[i];
+      const embedding = await embeddingService.extrairVetorDocumento(sol.problema, sol.solucao);
 
-    for (const sol of dados.solucoes) {
-      // TÉCNICA DE ENGENHARIA: Triplicamos o título para que a IA dê prioridade total a ele.
-      // Isso resolve o problema de puxar informações aleatórias do corpo da solução.
-      const textoParaVetor = `PROBLEMA: ${sol.problema}. PROBLEMA: ${sol.problema}. PROBLEMA: ${sol.problema}. CONTEÚDO: ${sol.solucao}`;
-
-      const output = await extractor(textoParaVetor, {
-        pooling: 'mean',
-        normalize: true
-      });
-
-      const embedding = Array.from(output.data);
-
-      // Monta o objeto do ponto com metadados para o Discord
       pontos.push({
         id: sol.id,
         vector: embedding,
@@ -60,25 +37,48 @@ async function popularQdrant() {
         }
       });
 
-      console.log(`   🎯 Indexado: ID ${sol.id} - ${sol.problema.substring(0, 30)}...`);
+      if ((i + 1) % 10 === 0 || i === dados.solucoes.length - 1) {
+        console.log(`   ✅ Processados: ${i + 1}/${dados.solucoes.length}`);
+      }
     }
 
-    // 4. Upsert em Lote (Envia tudo de uma vez para o banco)
-    console.log('\n📡 Enviando lote completo para o Qdrant...');
-    await client.upsert(COLLECTION_NAME, {
-      wait: true,
-      points: pontos
+    // FASE 2: REDE (Apenas Qdrant)
+    console.log('\n🚀 Iniciando população (Fase 2: Envio para Qdrant)...');
+
+    const client = new QdrantClient({
+      url: 'http://127.0.0.1:6333',
+      checkCompatibility: false,
+      timeout: 300000
     });
 
-    // 5. Validação Final
+    const collections = await client.getCollections();
+    if (collections.collections.find(c => c.name === COLLECTION_NAME)) {
+      console.log(`🗑️ Limpando coleção antiga...`);
+      await client.deleteCollection(COLLECTION_NAME);
+    }
+
+    console.log(`🏗️ Criando coleção...`);
+    await client.createCollection(COLLECTION_NAME, {
+      vectors: { size: 384, distance: 'Cosine' }
+    });
+
+    console.log(`📡 Enviando ${pontos.length} pontos em lotes...`);
+    const chunkSize = 5;
+    for (let i = 0; i < pontos.length; i += chunkSize) {
+      const chunk = pontos.slice(i, i + chunkSize);
+      await client.upsert(COLLECTION_NAME, {
+        wait: true,
+        points: chunk
+      });
+      console.log(`   📬 Lote ${Math.floor(i / chunkSize) + 1} enviado.`);
+      await new Promise(r => setTimeout(r, 500));
+    }
+
     const info = await client.getCollection(COLLECTION_NAME);
-    console.log('\n✨ População concluída com sucesso!');
-    console.log(`📊 Total na coleção: ${info.points_count} pontos indexados.`);
-    console.log(`🔗 Dashboard: http://localhost:6333/dashboard\n`);
+    console.log(`\n✨ SUCESSO! Total: ${info.points_count} pontos.`);
 
   } catch (erro) {
-    console.error('\n❌ Erro fatal durante a população:');
-    console.error(erro.message);
+    console.error('\n❌ ERRO FATAL:', erro);
     process.exit(1);
   }
 }

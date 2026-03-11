@@ -1,110 +1,79 @@
 /**
- * 🧭 DETECTOR DE INTENÇÃO
- * Classifica mensagens em categorias e coordena respostas apropriadas
+ * 🧭 DETECTOR DE INTENÇÃO (Versão AI-ONLY)
+ * Classifica mensagens em categorias usando exclusivamente IA (Ollama)
  * 
- * Versão: 3.0 (com validação de contexto semântico)
  * Padrão: camelCase, integrado ao fluxo existente
  */
 
 const responseGenerator = require('../generators/responseGenerator');
-const messageAnalyzer = require('./messageAnalyzer');
+const config = require('../../../core/config');
+const fetch = require('node-fetch');
 
 class DetectIntention {
   constructor() {
     this.generador = new responseGenerator();
-    this.validadorContexto = new messageAnalyzer();
+    this.urlOllama = config.OLLAMA_URL;
+    this.modelo = config.OLLAMA_MODEL;
 
-    this.urlOllama = process.env.URL_OLLAMA || 'http://127.0.0.1:11434';
-    this.modelo = process.env.MODELO_OLLAMA || 'qwen1.5b-safe:latest';
-    this.ollamaDisponivel = process.env.USAR_HUMANIZACAO === 'true';
-
-    // Padrões de saudação
-    this.padroesSaudacao = [
-      /^(olá|oi|opa|e aí|e ai|tudo bem|como vai|bom dia|boa tarde|boa noite|hey|hi|hello)/i,
-      /^(bem.?vindo|welcome|blz|valeu|thanks|obrigad)/i,
-      /^(tudo|cê tá|você está|que tal)/i
-    ];
-
-    // Palavras-chave de suporte
-    this.palavrasChaveSuporte = [
-      'como', 'qual', 'onde', 'quando', 'por que', 'porquê', 'sistema',
-      'problema', 'erro', 'bug', 'não funciona', 'não tá', 'falha',
-      'quebrado', 'crash', 'travou', 'congelou', 'usuário', 'senha',
-      'login', 'acesso', 'permissão', 'relatório', 'backup', 'export',
-      'import', 'download', 'upload', 'configurar', 'instalar',
-      'desinstalar', 'atualizar', 'version', 'versão', 'reset',
-      'reiniciar', 'reboot', 'sincronizar', 'conectar', 'desconectar',
-      'servidor', 'banco', 'dados', 'tabela', 'campo', 'inovar',
-      'suporte', 'help', 'ajuda'
-    ];
-
-    // Palavras-chave off-topic
-    this.palavrasOffTopic = [
-      'piada', 'humor', 'meme', 'qual seu nome', 'quem é você',
-      'age', 'idade', 'namorada', 'namoro', 'amor', 'política',
-      'futebol', 'time', 'jogo', 'filme', 'série', 'música', 'banda',
-      'comida', 'receita', 'pizza', 'cerveja', 'vinho', 'viagem',
-      'carro', 'moto', 'computador pessoal', 'gamer', 'game',
-      'anime', 'manga', 'bolsa', 'ações', 'cripto'
-    ];
-
-    console.log('🧭 Detector de Intenção v2.0 inicializado');
+    console.log('🧭 Detector de Intenção (AI-ONLY) inicializado');
   }
 
   /**
-   * Classificar mensagem com validação de contexto e gerar resposta
+   * Classificar mensagem e gerar resposta (Fluxo AI-ONLY)
    */
   async classificarComResposta(mensagem) {
-    // Primeira: Validar contexto
-    const validacao = this.validadorContexto.validar(mensagem);
-    const acao = this.validadorContexto.sugerirAcao(validacao);
+    const textoLimpo = mensagem.trim();
 
-    // Usa Ollama se disponível, senão cai no regex
-    const classificacao = this.ollamaDisponivel
-      ? await this.classificarComOllama(mensagem)
-      : this.classificar(mensagem);
+    // 1. CHECAGEM RÁPIDA DE COMANDO (Prefix ! )
+    // Única exceção de regex/string match por performance e segurança
+    if (textoLimpo.startsWith('!')) {
+      return {
+        tipo: 'COMANDO',
+        confianca: 1.0,
+        descricao: 'Comando manual via prefixo !',
+        fonte: 'SISTEMA'
+      };
+    }
 
-    // Combinar análise de intenção com validação de contexto
-    const analiseCompleta = {
-      ...classificacao,
-      validacaoContexto: validacao,
-      acaoRecomendada: acao,
-      confianca: Math.min(classificacao.confianca * validacao.score, 1.0)
-    };
+    // 2. CLASSIFICAÇÃO VIA IA
+    const classificacao = await this.classificarComOllama(textoLimpo);
 
-    // Se for resposta coloquial, gera também a resposta
-    if (['SAUDACAO', 'OFF_TOPIC', 'VAGO', 'INDEFINIDO'].includes(analiseCompleta.tipo)) {
-      const resposta = await this.generador.gerarResposta(mensagem, analiseCompleta.tipo, validacao);
+    // Se for resposta coloquial (SAUDACAO, OFF_TOPIC, VAGO, INDEFINIDO), gera a resposta via IA
+    if (['SAUDACAO', 'OFF_TOPIC', 'VAGO', 'INDEFINIDO'].includes(classificacao.tipo)) {
+      const resposta = await this.generador.gerarResposta(mensagem, classificacao.tipo);
 
       return {
-        ...analiseCompleta,
+        ...classificacao,
         resposta: resposta.resposta,
         fonteFesposta: resposta.fonte,
         latencia: resposta.latencia
       };
     }
 
-    return analiseCompleta;
+    return classificacao;
   }
 
   async classificarComOllama(mensagem) {
-    const prompt = `Você é um classificador de mensagens para suporte técnico de um sistema ERP chamado Inovar Sistemas.
+    const prompt = `Você é um classificador de mensagens para o suporte técnico do sistema ERP "Inovar Sistemas".
 
-Classifique a mensagem abaixo em UMA das categorias:
-- SAUDACAO: cumprimentos, agradecimentos, despedidas
-- SUPORTE: dúvidas, problemas, erros sobre o sistema Inovar
-- OFF_TOPIC: assuntos sem relação com o sistema (política, esportes, entretenimento, etc)
-- VAGO: mensagem muito curta ou sem contexto suficiente para entender
-- COMANDO: começa com "!" (ex: !ajuda, !listar)
+Classifique a mensagem do usuário em UMA destas categorias:
+- SAUDACAO: Cumprimentos, agradecimentos ou despedidas (Ex: "Olá", "bom dia", "obrigado", "valeu").
+- SUPORTE: Qualquer dúvida sobre o sistema ERP Inovar, processos fiscais, contábeis ou de venda (Ex: "Como criar SPED?", "Erro na NFe", "Configurar TEF", "Relatório de vendas", "Cadastrar produto", "Sincronizar PDV", "Mariadb parou").
+- OFF_TOPIC: Assuntos totalmente fora do contexto de software ou empresa (Ex: "quem ganhou o jogo?", "como fazer um bolo", "me conte uma piada", "rimas").
+- VAGO: Mensagens que não possuem conteúdo suficiente para classificar (Ex: "oi" e nada mais, "????", "teste", letras soltas "a", "b", "f").
+- COMANDO: Mensagens que iniciam com o prefixo "!".
 
-Responda APENAS com um JSON no formato:
-{"tipo": "CATEGORIA", "confianca": 0.0, "motivo": "explicação curta"}
+REGRAS CRÍTICAS:
+1. "SPED", "NFe", "Sieg", "Mariadb", "XML", "Heidi" são termos TÉCNICOS do sistema Inovar. Se aparecerem, é SUPORTE.
+2. Seja conservador com OFF_TOPIC: Na dúvida entre SUPORTE e OFF_TOPIC, escolha SUPORTE.
+
+Responda EXCLUSIVAMENTE em formato JSON:
+{"tipo": "CATEGORIA", "confianca": 0.0, "motivo": " explicação curta"}
 
 Mensagem: "${mensagem}"`;
 
     try {
-      // Usamos fetch local
-      const fetch = require('node-fetch');
+      console.log(`[OLLAMA] Classificando: "${mensagem.substring(0, 50)}${mensagem.length > 50 ? '...' : ''}"`);
       const response = await fetch(`${this.urlOllama}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -116,12 +85,19 @@ Mensagem: "${mensagem}"`;
         })
       });
 
-      const data = await response.json();
-      const texto = data.response.trim();
+      if (!response.ok) throw new Error(`Ollama indisponível (Status: ${response.status})`);
 
-      // Remove possíveis blocos de código markdown
-      const jsonLimpo = texto.replace(/```json|```/g, '').trim();
-      const resultado = JSON.parse(jsonLimpo);
+      const data = await response.json();
+      const texto = (data.response || '').trim();
+
+      let resultado;
+      try {
+        const jsonLimpo = texto.replace(/```json|```/g, '').trim();
+        resultado = JSON.parse(jsonLimpo);
+      } catch (e) {
+        console.error(`[OLLAMA ERROR] Falha ao parsear JSON. Resposta bruta: "${texto}"`);
+        throw new Error("Resposta da IA em formato inválido.");
+      }
 
       return {
         tipo: resultado.tipo || 'INDEFINIDO',
@@ -130,133 +106,14 @@ Mensagem: "${mensagem}"`;
         fonte: 'OLLAMA'
       };
     } catch (erro) {
-      // Fallback para classificação por regex se Ollama falhar
-      console.warn(`⚠️ Ollama indisponível para classificação: ${erro.message}`);
-      return this.classificar(mensagem); // método existente com regex
+      console.error(`❌ Erro crítico no Detector de Intenção (AI): ${erro.message}`);
+      // Se não tem IA, o bot "morre" (não funciona) conforme pedido do usuário
+      throw new Error("Sistema de IA indisponível. O bot não pode processar mensagens sem conexão com o Ollama.");
     }
   }
 
   /**
-   * Classificar a mensagem em uma das 6 categorias (V3 - mais inteligente)
-   */
-  classificar(mensagem) {
-    const msg = mensagem.trim().toLowerCase();
-    const validacao = this.validadorContexto.validar(msg);
-
-    // 1. COMANDO
-    if (msg.startsWith('!')) {
-      return {
-        tipo: 'COMANDO',
-        confianca: 1.0,
-        descricao: 'Comando do bot'
-      };
-    }
-
-    // 2. SAUDAÇÃO
-    if (this._ehSaudacao(msg)) {
-      return {
-        tipo: 'SAUDACAO',
-        confianca: 0.95,
-        descricao: 'Saudação ou cumprimento'
-      };
-    }
-
-    // 3. OFF_TOPIC (baseado em validação)
-    const offtopic = validacao?.categorias?.offtopic || false;
-    if (offtopic) {
-      return {
-        tipo: 'OFF_TOPIC',
-        confianca: Math.min(validacao.scoreOffTopic || 0, 1.0),
-        descricao: 'Não relacionada a suporte',
-        motivo: validacao.motivo
-      };
-    }
-
-    // 4. VAGO (mensagem muito curta ou sem contexto)
-    const scoreRelevancia = validacao?.scoreRelevancia || 0;
-    if (this._ehMuitoCurta(msg) || scoreRelevancia < 0.2) {
-      return {
-        tipo: 'VAGO',
-        confianca: 0.7,
-        descricao: 'Mensagem vaga ou muito curta'
-      };
-    }
-
-    // 5. SUPORTE (tem palavras-chave e contexto válido)
-    const scoreSuporte = this._calcularScoreSuporte(msg);
-    if (scoreSuporte > 0.3 || scoreRelevancia > 0.5) {
-      return {
-        tipo: 'SUPORTE',
-        confianca: Math.min(scoreSuporte * 0.7 + scoreRelevancia * 0.3, 1.0),
-        descricao: 'Pergunta sobre o sistema'
-      };
-    }
-
-    // 6. INDEFINIDO
-    return {
-      tipo: 'INDEFINIDO',
-      confianca: validacao?.score || 0,
-      descricao: 'Não classificado com certeza'
-    };
-  }
-
-  /**
-   * Verificar se é saudação
-   */
-  _ehSaudacao(msg) {
-    return this.padroesSaudacao.some(padrao => padrao.test(msg));
-  }
-
-  /**
-   * Verificar se é muito curta
-   */
-  _ehMuitoCurta(msg) {
-    const padroesCurtos = [
-      /^(ok|sim|não|nao|blz|claro|pode|certo|entendi|msg)$/i,
-      /^(haha|kkkk|rsrs|kkk|hehe|ué|uai|sei|ah|oi)$/i
-    ];
-
-    if (padroesCurtos.some(p => p.test(msg))) return true;
-    if (msg.length < 5) return true;
-    if (/^[0-9!@#$%^&*()]+$/.test(msg)) return true;
-
-    return false;
-  }
-
-  /**
-   * Score de off-topic (0-1)
-   */
-  _calcularScoreOffTopic(msg) {
-    let matches = 0;
-    const totalPalavras = msg.split(/\s+/).length;
-
-    this.palavrasOffTopic.forEach(palavra => {
-      if (new RegExp(`\\b${palavra}\\b`, 'i').test(msg)) {
-        matches++;
-      }
-    });
-
-    return Math.min(matches / Math.max(totalPalavras / 2, 1), 1);
-  }
-
-  /**
-   * Score de suporte (0-1)
-   */
-  _calcularScoreSuporte(msg) {
-    let matches = 0;
-    const totalPalavras = msg.split(/\s+/).length;
-
-    this.palavrasChaveSuporte.forEach(palavra => {
-      if (new RegExp(`\\b${palavra}\\b`, 'i').test(msg)) {
-        matches++;
-      }
-    });
-
-    return Math.min(matches / Math.max(totalPalavras / 2, 1), 1);
-  }
-
-  /**
-   * Obter emoji e descrição por tipo
+   * Mapeamento de emojis e nomes para UI
    */
   obterInfo(tipo) {
     const info = {
@@ -271,24 +128,11 @@ Mensagem: "${mensagem}"`;
     return info[tipo] || { emoji: '❓', desc: 'Desconhecido' };
   }
 
-  /**
-   * Obter validação de contexto para uma mensagem
-   */
-  obterValidacaoContexto(mensagem) {
-    return this.validadorContexto.validar(mensagem);
-  }
-
-  /**
-   * Obter análise completa (para debug)
-   */
   async obterAnaliseCompleta(mensagem) {
     const resposta = await this.classificarComResposta(mensagem);
-    const validacao = this.validadorContexto.obterAnaliseDetalhada(mensagem);
-
     return {
       mensagem,
       classificacao: resposta,
-      validacao: validacao,
       timestamp: new Date().toISOString()
     };
   }

@@ -1,25 +1,23 @@
-const IntentionClassifier = require('../support/analyzers/intentionClassifier');
-const config = require('../../core/config');
-
-const intentionClassifier = new IntentionClassifier();
+const messageHandler = require('../../handlers/messageHandler');
 
 module.exports = {
   name: 'messageCreate',
-  async execute(message, client) {
+  async execute(message) {
     if (message.author.bot) return;
-    if (message.content.length < config.MIN_MESSAGE_LENGTH) return;
 
-    try {
-      const resultado = await intentionClassifier.classificarComResposta(
-        message.content
-      );
+    const isDM = message.channel.type === 1; // ChannelType.DM
 
-      if (resultado.resposta) {
-        await message.reply(resultado.resposta);
+    if (!isDM) {
+      try {
+        await message.author.send(
+          '👋 Oi! Para dúvidas sobre o sistema, me manda uma mensagem aqui no privado. Estou pronto para ajudar!'
+        );
+      } catch {
+        // Usuário pode ter DMs desabilitadas — ignora silenciosamente
       }
-    } catch (erro) {
-      console.error('❌ Erro ao processar mensagem:', erro);
-      await message.reply('Desculpa, ocorreu um erro.');
+      return;
     }
+
+    await messageHandler.processarMensagem(message);
   },
 };
