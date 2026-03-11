@@ -3,3 +3,4 @@ logs/
 node_modules/
 qdrant_storage/
 solutions.json
+TASKS.md
