@@ -12,10 +12,6 @@ class Humanizador {
       fallback: 0,
       tempoTotal: 0
     };
-
-    console.log(`🤖 Humanizador V04 inicializado:`);
-    console.log(`   URL Ollama: ${this.urlOllama}`);
-    console.log(`   Modelo: ${this.modelo}`);
   }
 
   /**
@@ -44,7 +40,10 @@ class Humanizador {
     const prompt = this._construirPrompt(solucaoOriginal, perguntaUsuario);
 
     try {
-      // Fazer requisição ao Ollama
+      // Fazer requisição ao Ollama com timeout de 30s
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const resposta = await fetch(`${this.urlOllama}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,8 +56,11 @@ class Humanizador {
             top_p: 0.9,
             num_predict: 600     // Aumentado para mais liberdade
           }
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       // Verificar status HTTP
       if (!resposta.ok) {

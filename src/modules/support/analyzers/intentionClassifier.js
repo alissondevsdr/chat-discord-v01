@@ -14,8 +14,6 @@ class DetectIntention {
     this.generador = new responseGenerator();
     this.urlOllama = config.OLLAMA_URL;
     this.modelo = config.OLLAMA_MODEL;
-
-    console.log('🧭 Detector de Intenção (AI-ONLY) inicializado');
   }
 
   /**
@@ -74,6 +72,10 @@ Mensagem: "${mensagem}"`;
 
     try {
       console.log(`[OLLAMA] Classificando: "${mensagem.substring(0, 50)}${mensagem.length > 50 ? '...' : ''}"`);
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
+
       const response = await fetch(`${this.urlOllama}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -82,8 +84,11 @@ Mensagem: "${mensagem}"`;
           prompt,
           stream: false,
           options: { temperature: 0.1, num_predict: 100 }
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!response.ok) throw new Error(`Ollama indisponível (Status: ${response.status})`);
 
@@ -106,9 +111,22 @@ Mensagem: "${mensagem}"`;
         fonte: 'OLLAMA'
       };
     } catch (erro) {
-      console.error(`❌ Erro crítico no Detector de Intenção (AI): ${erro.message}`);
-      // Se não tem IA, o bot "morre" (não funciona) conforme pedido do usuário
-      throw new Error("Sistema de IA indisponível. O bot não pode processar mensagens sem conexão com o Ollama.");
+      console.error(`⚠️ Ollama indisponível no Detector de Intenção: ${erro.message}`);
+      console.warn('[FALLBACK] Usando classificação por regex como fallback');
+
+      // Fallback mínimo: distingue COMANDO de texto e tenta identificar SUPORTE por palavras-chave técnicas
+      const mensagemLower = mensagem.toLowerCase();
+      const termosSupporte = ['sped', 'nfe', 'nf-e', 'sieg', 'mariadb', 'xml', 'heidi', 'pdv', 'tef',
+        'estoque', 'fiscal', 'nota', 'relatório', 'produto', 'cliente', 'venda', 'cadastr', 'emitir',
+        'gerar', 'sincronizar', 'configur', 'errro', 'erro', 'não consigo', 'não abre', 'não aparece'];
+      const ehSuportePossivel = termosSupporte.some(t => mensagemLower.includes(t));
+
+      return {
+        tipo: ehSuportePossivel ? 'SUPORTE' : 'INDEFINIDO',
+        confianca: 0.5,
+        descricao: `[FALLBACK] Ollama indisponível — classificação aproximada por regex`,
+        fonte: 'FALLBACK'
+      };
     }
   }
 

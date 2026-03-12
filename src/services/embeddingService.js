@@ -21,7 +21,7 @@ class EmbeddingService {
 
     async extrairVetorDocumento(problema, solucao) {
         if (!this.extractor) await this.init();
-        const textoParaVetor = `passage: PROBLEMA: ${problema}. PROBLEMA: ${problema}. PROBLEMA: ${problema}. CONTEÚDO: ${solucao}`;
+        const textoParaVetor = `passage: ${problema}. Solução: ${solucao}`;
         const output = await this.extractor(textoParaVetor, { pooling: 'mean', normalize: true });
         return Array.from(output.data);
     }

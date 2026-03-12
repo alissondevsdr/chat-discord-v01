@@ -11,6 +11,9 @@ class QueryOptimizer {
 
     async reescreverPergunta(perguntaOriginal) {
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000);
+
             const response = await fetch(`${this.urlOllama}/api/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -19,8 +22,11 @@ class QueryOptimizer {
                     prompt: `Você é especialista em sistemas ERP de gestão comercial.\n\nReescreva a pergunta do usuário para melhorar a busca em uma base de conhecimento do sistema.\n\nREGRAS IMPORTANTES:\n- Preserve a intenção da pergunta.\n- Preserve o verbo de ação (ex: criar, emitir, cadastrar, alterar, consultar).\n- Preserve o contexto de uso dentro do sistema.\n- NÃO transforme a pergunta em definição conceitual.\n- NÃO deixe a pergunta genérica.\n- A pergunta deve continuar parecendo algo que um usuário perguntaria ao suporte do sistema.\n\nResponda com apenas 1 frase curta.\n\nExemplos:\n\nPergunta original: "Como criar SPED?"\nPergunta reescrita: "Como gerar o arquivo SPED no módulo fiscal do sistema?"\n\nPergunta original: "Não consigo emitir nota"\nPergunta reescrita: "Como emitir NF-e no sistema quando ocorre erro na emissão?"\n\nAgora reescreva:\n\nPergunta original: "${perguntaOriginal}"\nPergunta reescrita:`,
                     stream: false,
                     options: { temperature: 0.1, num_predict: 80 }
-                })
+                }),
+                signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
 
             const data = await response.json();
             if (data.error) throw new Error(data.error);
@@ -37,6 +43,9 @@ class QueryOptimizer {
 
     async buscarComMultiQuery(pergunta) {
         try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000);
+
             const response = await fetch(`${this.urlOllama}/api/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -45,8 +54,11 @@ class QueryOptimizer {
                     prompt: `Você é especialista em suporte de sistemas ERP de gestão comercial.\n\nGere 3 variações de busca para a mesma pergunta do usuário.\n\nOBJETIVO:\nMelhorar a busca em uma base de conhecimento do sistema.\n\nREGRAS:\n- Preserve o significado da pergunta original.\n- Preserve o verbo principal da ação (ex: criar, emitir, gerar, cadastrar, importar).\n- Preserve os termos importantes do sistema (ex: NF-e, SPED, cliente, produto, estoque).\n- Não transforme em explicação conceitual.\n- Não responda a pergunta.\n- As variações devem parecer perguntas que um usuário faria ao suporte.\n\nFORMATO:\nRetorne apenas 3 perguntas, uma por linha, sem numeração.\n\nPergunta original: "${pergunta}"\n\nVariações de busca:`,
                     stream: false,
                     options: { temperature: 0.4, num_predict: 150 }
-                })
+                }),
+                signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
 
             const data = await response.json();
             if (data.error) throw new Error(data.error);
@@ -68,7 +80,8 @@ class QueryOptimizer {
             });
 
             return Array.from(mapa.values()).sort((a, b) => b.score - a.score);
-        } catch {
+        } catch (erro) {
+            registrarLog('AVISO', `⚠️ Multi-query falhou, usando busca simples: ${erro.message}`);
             return databaseService.buscarSolucaoIA(pergunta);
         }
     }

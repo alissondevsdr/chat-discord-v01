@@ -79,25 +79,18 @@ class CommandHandler {
 
             const textoPraAnalisar = partes.slice(1).join(' ');
             const analiseCompleta = await classificador.obterAnaliseCompleta(textoPraAnalisar);
-            const val = analiseCompleta.validacao;
+            const classificacao = analiseCompleta.classificacao;
 
             let resposta = `**📊 ANÁLISE COMPLETA: "${textoPraAnalisar}"**\n\n`;
-            resposta += `🎯 **Classificação:** ${analiseCompleta.classificacao.tipo} (${(analiseCompleta.classificacao.confianca * 100).toFixed(0)}%)\n`;
-            resposta += `📈 **Relevância ao Sistema:** ${(val.scoreRelevancia * 100).toFixed(0)}%\n`;
-            resposta += `🚨 **Off-Topic Score:** ${(val.scoreOffTopic * 100).toFixed(0)}%\n`;
-            resposta += `🔧 **Estrutura:** ${val.categorias.estrutura}\n`;
-            resposta += `✅ **Coerência:** ${(val.scoreCoerencia * 100).toFixed(0)}%\n`;
-            resposta += `\n💡 **Motivo:** ${val.motivo}\n`;
-            resposta += `🎬 **Ação Recomendada:** ${analiseCompleta.classificacao.acaoRecomendada}\n`;
+            resposta += `🎯 **Classificação:** ${classificacao.tipo} (${(classificacao.confianca * 100).toFixed(0)}%)\n`;
+            resposta += `💡 **Motivo:** ${classificacao.descricao || classificacao.motivo || 'N/A'}\n`;
+            resposta += `🌐 **Fonte:** ${classificacao.fonte || 'OLLAMA'}\n`;
+            resposta += `🎬 **Ação Recomendada:** Processar como ${classificacao.tipo}\n`;
+            resposta += `🕐 **Timestamp:** ${analiseCompleta.timestamp}\n`;
 
-            if (analiseCompleta.classificacao.resposta) {
-                resposta += `\n📝 **Resposta Gerada:** ${analiseCompleta.classificacao.resposta.substring(0, 200)}...\n`;
+            if (classificacao.resposta) {
+                resposta += `\n📝 **Resposta Gerada:** ${classificacao.resposta.substring(0, 200)}...\n`;
             }
-
-            resposta += `\n📌 **Detalhes da Validação:**\n`;
-            resposta += `• Poesia/Rimas: ${val.categorias.temPoesiasOuRimas ? 'SIM ⚠️' : 'não'}\n`;
-            resposta += `• Maiúsculas: ${val.scoreCoerencia > 0.5 ? 'Normal ✅' : 'Suspeito 🚩'}\n`;
-            resposta += `• Valido: ${val.valido ? 'SIM ✅' : 'NÃO ❌'}\n` + '```';
 
             await message.reply(resposta);
             return;

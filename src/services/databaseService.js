@@ -57,6 +57,7 @@ class DatabaseService {
                 }]
             });
 
+            // ✅ Qdrant confirmou sucesso — agora é seguro persistir no JSON
             const novaSolucao = {
                 id: novoId,
                 palavras_chave: palavrasChave,
@@ -76,7 +77,8 @@ class DatabaseService {
 
             return novoId;
         } catch (erro) {
-            registrarLog('ERRO', `Falha ao salvar: ${erro.message}`);
+            // JSON não foi modificado pois push/writeFileSync estão após o upsert
+            registrarLog('ERRO', `Falha ao salvar (JSON e Qdrant permanecem sincronizados): ${erro.message}`);
             return null;
         }
     }

@@ -19,14 +19,23 @@ const client = new Client({
 });
 
 async function iniciarSistema() {
-  registrarLog('INFO', '🚀 Iniciando sistema...');
+
+
+  // Bug #7: Validar variáveis de ambiente obrigatórias antes de qualquer outra operação
+  const required = ['DISCORD_TOKEN', 'MODELO_OLLAMA'];
+  for (const key of required) {
+    if (!process.env[key]) {
+      console.error(`❌ Variável de ambiente obrigatória não definida: ${key}`);
+      process.exit(1);
+    }
+  }
 
   // 1. Inicializar Embeddings e Database
   await embeddingService.init();
   databaseService.init();
 
   // 2. Inicializar Humanizador
-  registrarLog('INFO', '✨ Inicializando Humanizador (Ollama)...');
+  registrarLog('INFO', '✨ Inicializando Ollama');
   const humanizador = new SolutionHumanizer();
   const ollamaOk = await humanizador.testarConexao();
 
@@ -36,8 +45,6 @@ async function iniciarSistema() {
   } else {
     registrarLog('AVISO', '⚠️ Ollama não acessível. Humanização desativada.');
   }
-
-  registrarLog('INFO', '✅ Serviços de IA Prontos!');
 
   // 3. Registrar Eventos do Discord
   client.once('clientReady', () => {

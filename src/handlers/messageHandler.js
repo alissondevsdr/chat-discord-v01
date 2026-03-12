@@ -9,6 +9,9 @@ class MessageHandler {
     constructor() {
         this.classificador = new IntentionClassifier();
         this.humanizador = null;
+        // Rate limiting: map de userId -> timestamp da última mensagem
+        this.cooldowns = new Map();
+        this.COOLDOWN_MS = 3000; // 3 segundos entre mensagens por usuário
     }
 
     setHumanizador(humanizador) {
@@ -17,6 +20,15 @@ class MessageHandler {
 
     async processarMensagem(message) {
         try {
+            // Rate limiting por usuário
+            const agora = Date.now();
+            const ultimaMensagem = this.cooldowns.get(message.author.id) || 0;
+            if (agora - ultimaMensagem < this.COOLDOWN_MS) {
+                await message.reply('⏳ Aguarde um momento antes de enviar outra mensagem.');
+                return;
+            }
+            this.cooldowns.set(message.author.id, agora);
+
             console.log(`\n📩 Mensagem recebida de ${message.author.username}: "${message.content}"`);
             await message.channel.sendTyping();
 
@@ -101,7 +113,8 @@ class MessageHandler {
 
         if (resultados.length > 0 && resultados[0].score > config.THRESHOLD_MINIMO) {
             const principal = resultados[0].payload;
-            const confianca = (resultados[0].score * 100).toFixed(1);
+            // Bug #6 corrigido: parseFloat garante que confianca é número, não string
+            const confianca = parseFloat((resultados[0].score * 100).toFixed(1));
 
             let solucaoExibida = principal.solucao;
             let humanizada = false;

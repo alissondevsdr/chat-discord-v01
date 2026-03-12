@@ -12,8 +12,6 @@ class responseGenerator {
   constructor() {
     this.urlOllama = config.OLLAMA_URL;
     this.modelo = config.OLLAMA_MODEL;
-
-    console.log(`💬 Gerador de Resposta Coloquial (AI-ONLY) inicializado`);
   }
 
   /**
@@ -24,6 +22,9 @@ class responseGenerator {
 
     try {
       const prompt = this._construirPrompt(mensagem, tipo);
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
 
       const resposta = await fetch(`${this.urlOllama}/api/generate`, {
         method: 'POST',
@@ -37,8 +38,11 @@ class responseGenerator {
             top_p: 0.95,
             num_predict: 200
           }
-        })
+        }),
+        signal: controller.signal
       });
+
+      clearTimeout(timeoutId);
 
       if (!resposta.ok) {
         throw new Error(`Ollama indisponível (Status: ${resposta.status})`);

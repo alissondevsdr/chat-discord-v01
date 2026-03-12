@@ -1,3 +1,15 @@
+/**
+ * ⚠️ ATENÇÃO — SERVIÇO NÃO UTILIZADO (CÓDIGO MORTO)
+ * Este serviço NÃO está sendo importado por nenhum módulo do projeto.
+ * As chamadas ao Ollama são feitas diretamente via fetch em:
+ *   - src/modules/support/analyzers/intentionClassifier.js
+ *   - src/modules/support/generators/responseGenerator.js
+ *   - src/modules/support/generators/solutionHumanizer.js
+ *   - src/services/queryOptimizer.js
+ *
+ * Status: Rascunho / Refatoração futura planejada
+ * Se for centralizar as chamadas Ollama aqui no futuro, remova os fetches diretos acima.
+ */
 const fetch = require('node-fetch');
 const config = require('../core/config');
 
@@ -40,4 +52,4 @@ class OllamaService {
   }
 }
 
-module.exports = OllamaService;
+module.exports = OllamaService;
